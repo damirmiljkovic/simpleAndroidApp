@@ -1,6 +1,8 @@
 package net.idevcorp.simpleandroidapp.ui.fragments;
 
 
-public class WelcomFragment {
+import android.support.v4.app.Fragment;
+
+public class WelcomFragment extends Fragment {
 
 }

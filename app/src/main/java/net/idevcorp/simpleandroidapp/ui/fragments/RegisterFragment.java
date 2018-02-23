@@ -1,6 +1,8 @@
 package net.idevcorp.simpleandroidapp.ui.fragments;
 
 
-public class RegisterFragment {
+import android.support.v4.app.Fragment;
+
+public class RegisterFragment extends Fragment {
 
 }

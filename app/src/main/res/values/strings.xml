@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SimpleAndroidApp</string>
+    <string name="textview">naslov</string>
+    <string name="button">Button</string>
+    <string name="logfrag">logfrag</string>
+    <string name="textviewLogin">TextView</string>
+
+
 </resources>

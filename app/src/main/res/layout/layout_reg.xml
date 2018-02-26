@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutLoginId"
+    android:id="@+id/layoutRegistracijaId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="50dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
     android:orientation="vertical">
 
     <ImageView
@@ -31,13 +33,38 @@
         android:hint="@string/password_login"
         android:inputType="textPassword" />
 
+    <EditText
+        android:id="@+id/editTextFirstNameId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/first_name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextLastNameID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/last_name"
+        android:inputType="textPersonName" />
+
     <Button
         android:id="@+id/buttonLoginId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="30dp"
         android:background="@android:color/holo_red_light"
         android:text="@string/sign_in"
+        android:textColor="@android:color/background_light" />
+
+    <Button
+        android:id="@+id/buttonRegId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:text="@string/register"
         android:textColor="@android:color/background_light" />
 
 </LinearLayout>

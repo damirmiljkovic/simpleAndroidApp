@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.ui.fragments.LoginFragment;
+import net.idevcorp.simpleandroidapp.ui.fragments.RegisterFragment;
 import net.idevcorp.simpleandroidapp.ui.fragments.WelcomFragment;
 
 
@@ -21,13 +22,13 @@ public class InitialActivity extends AppCompatActivity  {
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
     WelcomFragment fragment;
-    LoginFragment loginFragment;
+    RegisterFragment registerFragment;
 
     public void probaj(View view){
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        loginFragment = new LoginFragment();
-        fragmentTransaction.replace(R.id.layoutInitialId, loginFragment);
+        registerFragment = new RegisterFragment();
+        fragmentTransaction.replace(R.id.layoutInitialId, registerFragment);
         fragmentTransaction.commit();
     }
 

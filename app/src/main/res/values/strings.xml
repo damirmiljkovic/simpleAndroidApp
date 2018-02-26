@@ -4,6 +4,12 @@
     <string name="button">Button</string>
     <string name="logfrag">logfrag</string>
     <string name="textviewLogin">TextView</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="password_login">Password</string>
+    <string name="email_login">Email</string>
+    <string name="register">REGISTER</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 
 
 </resources>

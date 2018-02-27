@@ -32,12 +32,15 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/buttonLoginId"
+        android:id="@+id/buttonLog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="30dp"
         android:background="@android:color/holo_red_light"
+        android:onClick="onClick"
         android:text="@string/sign_in"
         android:textColor="@android:color/background_light" />
+
 
 </LinearLayout>

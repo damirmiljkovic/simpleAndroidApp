@@ -15,7 +15,7 @@ public class RegisterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Log In");
+        getActivity().setTitle("Registration");
         return inflater.inflate(R.layout.layout_reg,container,false);
     }
 }

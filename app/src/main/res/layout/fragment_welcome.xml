@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutWelcomeId"
+    android:id="@+id/layoutWelcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="50dp"
     android:orientation="vertical">
 
 
@@ -15,16 +16,29 @@
         android:contentDescription="@android:string/unknownName"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
-    <ImageButton
-        android:id="@+id/imageButtonSigninId"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@android:string/unknownName"
-        android:onClick="probaj"
-        app:srcCompat="@drawable/signinbtn" />
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/btn_rounded_login"
+        android:onClick="onClick"
+
+        android:text="@string/log_in_btn"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/register_rounded_btn"
+        android:onClick="onClick"
+
+        android:text="@string/register_btn"
+        android:textColor="#FFFFFF" />
 
 
 </LinearLayout>

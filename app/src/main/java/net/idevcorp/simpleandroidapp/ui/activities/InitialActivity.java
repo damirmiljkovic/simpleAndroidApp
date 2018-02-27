@@ -4,6 +4,7 @@ package net.idevcorp.simpleandroidapp.ui.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -17,18 +18,20 @@ import net.idevcorp.simpleandroidapp.ui.fragments.RegisterFragment;
 import net.idevcorp.simpleandroidapp.ui.fragments.WelcomFragment;
 
 
-public class InitialActivity extends AppCompatActivity  {
+
+public class InitialActivity extends AppCompatActivity implements View.OnClickListener  {
 
     FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
-    WelcomFragment fragment;
+    WelcomFragment fragmentWelcome;
+    LoginFragment loginFragment;
     RegisterFragment registerFragment;
 
-    public void probaj(View view){
+    public void fragmentRealize(Fragment fragment){
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        registerFragment = new RegisterFragment();
-        fragmentTransaction.replace(R.id.layoutInitialId, registerFragment);
+        fragmentTransaction.replace(R.id.frameLayoutInitial,fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -40,11 +43,24 @@ public class InitialActivity extends AppCompatActivity  {
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragment = new WelcomFragment();
-        fragmentTransaction.add(R.id.layoutInitialId,fragment);
+        fragmentWelcome = new WelcomFragment();
+        fragmentTransaction.add(R.id.frameLayoutInitial,fragmentWelcome);
         fragmentTransaction.commit();
     }
 
 
-
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.buttonLogin){
+            loginFragment = new LoginFragment();
+            fragmentRealize(loginFragment);
+        }else if (view.getId() == R.id.buttonRegister){
+            registerFragment = new RegisterFragment();
+            fragmentRealize(registerFragment);
+        }else if (view.getId() == R.id.buttonLog){
+            Toast.makeText(this, "log in u dure!", Toast.LENGTH_SHORT).show();
+        }else if (view.getId() == R.id.buttonReg){
+            Toast.makeText(this, "registracija u dure!", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

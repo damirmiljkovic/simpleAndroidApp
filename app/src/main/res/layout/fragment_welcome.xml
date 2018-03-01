@@ -25,7 +25,6 @@
         android:layout_marginTop="100dp"
         android:background="@drawable/btn_rounded_login"
         android:onClick="onClick"
-
         android:text="@string/log_in_btn"
         android:textColor="#FFFFFF" />
 
@@ -36,7 +35,6 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/register_rounded_btn"
         android:onClick="onClick"
-
         android:text="@string/register_btn"
         android:textColor="#FFFFFF" />
 

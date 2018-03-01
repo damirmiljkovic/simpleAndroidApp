@@ -12,10 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import net.idevcorp.simpleandroidapp.R;
 
 public class LoginFragment extends Fragment  {
-
 
 
     @Nullable

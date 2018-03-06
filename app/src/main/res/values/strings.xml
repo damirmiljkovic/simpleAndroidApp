@@ -13,6 +13,9 @@
     <string name="sign_up">SIGN UP</string>
     <string name="log_in_btn">LOG IN</string>
     <string name="register_btn">REGISTER</string>
+    <string name="remeber_me">Remember me!</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="remember_me">Remember me!</string>
 
 
 </resources>

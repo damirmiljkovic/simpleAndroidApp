@@ -2,15 +2,13 @@ package net.idevcorp.simpleandroidapp.ui.fragments;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +24,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.ui.activities.CompleteActivity;
-import net.idevcorp.simpleandroidapp.ui.activities.InitialActivity;
+import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 public class RegisterFragment extends Fragment {
 
     private EditText editTextRegisterMail;
     private EditText editTextRegisterPass;
     private FirebaseAuth auth;
-    private SharedPreferences sharedPreferences;
     private Button buttonRegister;
     private CheckBox checkBoxRegister;
 
@@ -41,7 +38,22 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Registration");
-        return inflater.inflate(R.layout.layout_reg,container,false);
+        View view = inflater.inflate(R.layout.layout_reg,container,false);
+        //jedan od nacina kako instancirati view-e
+        initViews(view);
+        //getView() vraca null jer view nije jos napravljen
+        return view;
+    }
+
+    private void initViews(View view){
+//        view.findViewById()
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //drugi nacin kako instancirati view-e
+//        getView().findViewById()
     }
 
     @Override
@@ -49,7 +61,8 @@ public class RegisterFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         auth = FirebaseAuth.getInstance();
-        sharedPreferences = getActivity().getSharedPreferences("net.idevcorp.simpleandroidapp", Context.MODE_PRIVATE);
+        PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), true);
         editTextRegisterMail = getActivity().findViewById(R.id.editTextMailId);
         editTextRegisterPass = getActivity().findViewById(R.id.editTextPassId);
         checkBoxRegister = getActivity().findViewById(R.id.checkBoxRegister);
@@ -73,10 +86,11 @@ public class RegisterFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                if (checkBoxRegister.isChecked()){
-                                    sharedPreferences.edit().putString("mailAddress",editTextRegisterMail.getText().toString()).apply();
-                                    sharedPreferences.edit().putString("passAddress",editTextRegisterPass.getText().toString()).apply();
-                                }
+//                                if (checkBoxRegister.isChecked()){
+                                    SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxRegister.isChecked());
+//                                    sharedPreferences.edit().putString("mailAddress",editTextRegisterMail.getText().toString()).apply();
+//                                    sharedPreferences.edit().putString("passAddress",editTextRegisterPass.getText().toString()).apply();
+//                                }
                                 Intent intent = new Intent(getContext(),CompleteActivity.class);
                                 startActivity(intent);
                             }else{

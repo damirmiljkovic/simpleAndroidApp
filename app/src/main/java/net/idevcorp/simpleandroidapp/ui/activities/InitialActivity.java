@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.ui.fragments.WelcomFragment;
-
+import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 
 public class InitialActivity extends AppCompatActivity  {
@@ -21,7 +21,7 @@ public class InitialActivity extends AppCompatActivity  {
     FragmentManager fragmentManager;
     WelcomFragment fragmentWelcome;
 
-    SharedPreferences sharedPreferences;
+//    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -29,8 +29,8 @@ public class InitialActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
 
-        sharedPreferences = getSharedPreferences("net.idevcorp.simpleandroidapp", Context.MODE_PRIVATE);
-        if (! sharedPreferences.getString("mailAddress","").isEmpty()){
+//        sharedPreferences = getSharedPreferences("net.idevcorp.simpleandroidapp", Context.MODE_PRIVATE);
+        if (SharedPreferencesManager.getKeepMeLoggedIn(this)){
             Intent intent = new Intent(getApplicationContext(),CompleteActivity.class);
             startActivity(intent);
         }

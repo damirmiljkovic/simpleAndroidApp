@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 public class SharedPreferencesManager {
 
     private static final String KEEP_ME_LOGGED_IN = "keep_me_logged_in";
+    private static final String EMAIL_TO_INSERT = "email_to_insert";
 
     private SharedPreferencesManager() {
     }
@@ -17,6 +18,15 @@ public class SharedPreferencesManager {
 
     public static boolean getKeepMeLoggedIn(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(KEEP_ME_LOGGED_IN, false);
+    }
+    public static void setEmail(Context context, String emailToInsert){
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(EMAIL_TO_INSERT,emailToInsert).apply();
+    }
+    public static String getEmail(Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(EMAIL_TO_INSERT,"");
+    }
+    public static void clearSavedPreferences(Context context){
+        PreferenceManager.getDefaultSharedPreferences(context).edit().clear().apply();
     }
 
     //TODO implement saving user email in shared preferences

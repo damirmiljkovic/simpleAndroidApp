@@ -38,43 +38,27 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Registration");
-        View view = inflater.inflate(R.layout.layout_reg,container,false);
-        //jedan od nacina kako instancirati view-e
-        initViews(view);
-        //getView() vraca null jer view nije jos napravljen
-        return view;
+        return inflater.inflate(R.layout.layout_reg,container,false);
     }
 
-    private void initViews(View view){
-//        view.findViewById()
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //drugi nacin kako instancirati view-e
-//        getView().findViewById()
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
         auth = FirebaseAuth.getInstance();
         PreferenceManager.getDefaultSharedPreferences(getActivity());
-        SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), true);
-        editTextRegisterMail = getActivity().findViewById(R.id.editTextMailId);
-        editTextRegisterPass = getActivity().findViewById(R.id.editTextPassId);
-        checkBoxRegister = getActivity().findViewById(R.id.checkBoxRegister);
-        buttonRegister = getActivity().findViewById(R.id.buttonReg);
+        editTextRegisterMail = view.findViewById(R.id.editTextMailId);
+        editTextRegisterPass = view.findViewById(R.id.editTextPassId);
+        checkBoxRegister = view.findViewById(R.id.checkBoxRegister);
+        buttonRegister = view.findViewById(R.id.buttonReg);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createUserFirebase();
             }
         });
-
     }
+
 
     private void createUserFirebase() {
 
@@ -86,11 +70,8 @@ public class RegisterFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-//                                if (checkBoxRegister.isChecked()){
-                                    SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxRegister.isChecked());
-//                                    sharedPreferences.edit().putString("mailAddress",editTextRegisterMail.getText().toString()).apply();
-//                                    sharedPreferences.edit().putString("passAddress",editTextRegisterPass.getText().toString()).apply();
-//                                }
+                                SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxRegister.isChecked());
+                                SharedPreferencesManager.setEmail(getActivity(),task.getResult().getUser().getEmail());
                                 Intent intent = new Intent(getContext(),CompleteActivity.class);
                                 startActivity(intent);
                             }else{

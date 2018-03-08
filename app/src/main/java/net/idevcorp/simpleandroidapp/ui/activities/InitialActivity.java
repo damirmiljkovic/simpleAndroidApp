@@ -21,15 +21,11 @@ public class InitialActivity extends AppCompatActivity  {
     FragmentManager fragmentManager;
     WelcomFragment fragmentWelcome;
 
-//    SharedPreferences sharedPreferences;
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
 
-//        sharedPreferences = getSharedPreferences("net.idevcorp.simpleandroidapp", Context.MODE_PRIVATE);
         if (SharedPreferencesManager.getKeepMeLoggedIn(this)){
             Intent intent = new Intent(getApplicationContext(),CompleteActivity.class);
             startActivity(intent);

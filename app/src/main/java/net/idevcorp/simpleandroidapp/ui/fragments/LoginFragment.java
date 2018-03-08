@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.ui.activities.CompleteActivity;
+import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 public class LoginFragment extends Fragment  {
 
@@ -41,17 +42,17 @@ public class LoginFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Loging in");
         return inflater.inflate(R.layout.layout_login,container,false);
+
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         auth = FirebaseAuth.getInstance();
-        sharedPreferences = getActivity().getSharedPreferences("net.idevcorp.simpleandroidapp",Context.MODE_PRIVATE);
-        editTextLoginMail = getActivity().findViewById(R.id.editTextLoginMail);
-        editTextLoginPass = getActivity().findViewById(R.id.editTextLoginPass);
-        checkBoxLogin = getActivity().findViewById(R.id.checkBoxLogin);
-        buttonLogin = getActivity().findViewById(R.id.buttonLog);
+        editTextLoginMail = view.findViewById(R.id.editTextLoginMail);
+        editTextLoginPass = view.findViewById(R.id.editTextLoginPass);
+        checkBoxLogin = view.findViewById(R.id.checkBoxLogin);
+        buttonLogin = view.findViewById(R.id.buttonLog);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,10 +70,8 @@ public class LoginFragment extends Fragment  {
                        @Override
                        public void onComplete(@NonNull Task<AuthResult> task) {
                            if (task.isSuccessful()){
-                               if (checkBoxLogin.isChecked()){
-                                   sharedPreferences.edit().putString("mailAddress",editTextLoginMail.getText().toString()).apply();
-                                   sharedPreferences.edit().putString("passAddress",editTextLoginPass.getText().toString()).apply();
-                               }
+                               SharedPreferencesManager.setKeepMeLoggedIn(getActivity(),checkBoxLogin.isChecked());
+                               SharedPreferencesManager.setEmail(getActivity(),task.getResult().getUser().getEmail());
                                Intent intent = new Intent(getContext(),CompleteActivity.class);
                                startActivity(intent);
                            }else{

@@ -12,18 +12,18 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
+import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 public class CompleteActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete);
         auth = FirebaseAuth.getInstance();
-        setTitle("Complete!");
+        setTitle(SharedPreferencesManager.getEmail(this));
     }
 
     @Override
@@ -37,8 +37,7 @@ public class CompleteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menuSignOut){
             auth.signOut();
-            sharedPreferences = getSharedPreferences("net.idevcorp.simpleandroidapp", Context.MODE_PRIVATE);
-            sharedPreferences.edit().clear().apply();
+            SharedPreferencesManager.clearSavedPreferences(getApplicationContext());
             Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
             startActivity(intent);
         }

@@ -11,7 +11,23 @@ public class AnswerModel {
     @SerializedName("has_more")
     private Boolean hasMore;
 
-//     "items":[  ],
+    public List<ItemModel> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemModel> items) {
+        this.items = items;
+    }
+
+    public Boolean getHasMore() {
+        return hasMore;
+    }
+
+    public void setHasMore(Boolean hasMore) {
+        this.hasMore = hasMore;
+    }
+
+    //     "items":[  ],
 //             "has_more":true,
 //             "backoff":10,
 //             "quota_max":300,

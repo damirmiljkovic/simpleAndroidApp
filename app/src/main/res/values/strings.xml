@@ -16,6 +16,9 @@
     <string name="remeber_me">Remember me!</string>
     <string name="sign_out">Sign Out</string>
     <string name="remember_me">Remember me!</string>
+    <string name="textviewAnswer">answer</string>
+    <string name="search_for">search for</string>
+    <string name="button_complete">find</string>
 
 
 </resources>

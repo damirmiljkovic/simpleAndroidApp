@@ -14,6 +14,7 @@ public class OwnerModel {
     private String profileImage;
     @SerializedName("display_name")
     private String displayName;
+    @SerializedName("link")
     private String link;
 
     public Long getReputation() {

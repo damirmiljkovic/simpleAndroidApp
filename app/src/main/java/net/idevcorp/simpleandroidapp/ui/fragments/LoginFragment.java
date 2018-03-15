@@ -69,7 +69,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void getAnswersAPI() {
-        RetrofitBuilder.getInstance().create(Endpoints.class).getAnswers()
+        RetrofitBuilder.getInstance().getAnswers()
                 .enqueue(new Callback<AnswerModel>() {
             @Override
             public void onResponse(Call<AnswerModel> call, Response<AnswerModel> response) {

@@ -12,20 +12,21 @@ public class RetrofitBuilder {
     private RetrofitBuilder() {
     }
 
-    private static Retrofit instance = null;
+    private static Endpoints instance = null;
 
-    public static Retrofit getInstance() {
+    public static Endpoints getInstance() {
         if (instance == null) {
             instance = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+                    .build()
+                    .create(Endpoints.class);
         }
 
         return instance;
     }
 
-    private static OkHttpClient getHttpClient(){
+    private static OkHttpClient getHttpClient() {
         return new OkHttpClient();
     }
 

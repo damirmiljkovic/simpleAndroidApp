@@ -10,6 +10,6 @@ import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 public class ApiUtil {
 
     public static Endpoints getEndpoints(){
-        return RetrofitBuilder.getInstance().create(Endpoints.class);
+        return RetrofitBuilder.getInstance();
     }
 }

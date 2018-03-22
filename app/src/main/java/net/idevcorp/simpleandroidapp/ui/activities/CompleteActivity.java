@@ -74,4 +74,5 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
             presenter.find("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
         }
     }
+
 }

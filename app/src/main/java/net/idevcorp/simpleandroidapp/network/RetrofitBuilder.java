@@ -26,8 +26,4 @@ public class RetrofitBuilder {
         return instance;
     }
 
-    private static OkHttpClient getHttpClient() {
-        return new OkHttpClient();
-    }
-
 }

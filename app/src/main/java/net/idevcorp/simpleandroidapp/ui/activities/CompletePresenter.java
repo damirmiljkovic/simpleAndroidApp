@@ -1,6 +1,9 @@
 package net.idevcorp.simpleandroidapp.ui.activities;
 
 
+import android.util.Log;
+import android.widget.Toast;
+
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 
@@ -27,7 +30,7 @@ public class CompletePresenter {
 
                     @Override
                     public void onFailure(Call<AnswerModel> call, Throwable t) {
-
+                        Log.i("errorMsg",t.toString());
                     }
                 });
     }

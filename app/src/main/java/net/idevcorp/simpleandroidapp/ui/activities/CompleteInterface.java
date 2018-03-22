@@ -7,6 +7,5 @@ public interface CompleteInterface {
 
     void onFindResult(AnswerModel result);
 
-    void onUserIdResult(long userId);
 
 }

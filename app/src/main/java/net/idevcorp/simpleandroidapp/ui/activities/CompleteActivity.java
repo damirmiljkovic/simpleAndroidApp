@@ -1,8 +1,12 @@
 package net.idevcorp.simpleandroidapp.ui.activities;
 
 import android.content.Intent;
+import android.icu.lang.UCharacter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
+import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompleteActivity extends AppCompatActivity implements CompleteInterface {
 
@@ -24,7 +32,9 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
     EditText editTextComplete;
     String msgResult = "";
     private CompletePresenter presenter;
-
+    private List<AnswerModel> answerModelList = new ArrayList<>();
+    AnswerItemsAdapter adapter;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +47,12 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
         presenter = new CompletePresenter(this);
         presenter.find("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
 
-
+        adapter = new AnswerItemsAdapter(answerModelList);
+        recyclerView = findViewById(R.id.recyclerViewComplete);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

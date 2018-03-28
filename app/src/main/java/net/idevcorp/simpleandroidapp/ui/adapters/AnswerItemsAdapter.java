@@ -8,43 +8,57 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.ItemModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerItemsAdapter extends RecyclerView.Adapter<AnswerItemsAdapter.MyViewHolder> {
 
-    private List<AnswerModel> answerModelList;
+    private List<ItemModel> itemModels;
 
-    public AnswerItemsAdapter(List<AnswerModel>answerModelList){
-        this.answerModelList = answerModelList;
+    public AnswerItemsAdapter(List<ItemModel> itemModels) {
+        this.itemModels = itemModels;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View viewDisplayName = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_display_name,parent,false);
+                .inflate(R.layout.layout_display_name, parent, false);
         return new MyViewHolder(viewDisplayName);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        AnswerModel answerModel = answerModelList.get(position);
-        holder.displayName.setText(answerModel.getItems().get(position).getOwner().getDisplayName());
+//        ItemModel itemModel = itemModels.get(position);
+        holder.bind(itemModels.get(position));
+//        holder.displayName.setText(itemModel.getOwner().getDisplayName());
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (itemModels == null) {
+            return 0;
+        } else {
+            return itemModels.size();
+        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView displayName;
+
+        private TextView displayName;
+        private TextView text;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             displayName = itemView.findViewById(R.id.textViewDisplayName);
+            text = itemView.findViewById(R.id.layout_display_text);
         }
+
+        public void bind(ItemModel itemModel) {
+            displayName.setText(itemModel.getOwner().getDisplayName());
+            text.setText(itemModel.getOwner().getUserType());
+        }
+
     }
 }

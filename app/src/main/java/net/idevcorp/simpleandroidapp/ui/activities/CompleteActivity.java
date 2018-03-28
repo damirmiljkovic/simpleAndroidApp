@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.ItemModel;
 import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
@@ -28,13 +29,14 @@ import java.util.List;
 public class CompleteActivity extends AppCompatActivity implements CompleteInterface {
 
     FirebaseAuth auth;
-    TextView textViewAnswer;
-    EditText editTextComplete;
+    TextView     textViewAnswer;
+    EditText     editTextComplete;
     String msgResult = "";
     private CompletePresenter presenter;
-    private List<AnswerModel> answerModelList = new ArrayList<>();
+    private static final List<ItemModel> itemModels = new ArrayList<>();
     AnswerItemsAdapter adapter;
-    RecyclerView recyclerView;
+    RecyclerView       recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
         presenter = new CompletePresenter(this);
         presenter.find("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
 
-        adapter = new AnswerItemsAdapter(answerModelList);
+        adapter = new AnswerItemsAdapter(itemModels);
         recyclerView = findViewById(R.id.recyclerViewComplete);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -58,16 +60,16 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu,menu);
+        menuInflater.inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menuSignOut){
+        if (item.getItemId() == R.id.menuSignOut) {
             auth.signOut();
             SharedPreferencesManager.clearSavedPreferences(getApplicationContext());
-            Intent intent = new Intent(getApplicationContext(),InitialActivity.class);
+            Intent intent = new Intent(getApplicationContext(), InitialActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -75,17 +77,22 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
 
     @Override
     public void onFindResult(AnswerModel result) {
-        textViewAnswer.setText(msgResult);
-        for (int i=0; i<10;i++){
-            msgResult = result.getItems().get(i).getOwner().getDisplayName()+", ";
-            textViewAnswer.append(msgResult);
+        if (result != null) {
+            itemModels.clear();
+            itemModels.addAll(result.getItems());
+            adapter.notifyDataSetChanged();
         }
+//        textViewAnswer.setText(msgResult);
+//        for (int i=0; i<10;i++){
+//            msgResult = result.getItems().get(i).getOwner().getDisplayName()+", ";
+//            textViewAnswer.append(msgResult);
+//        }
     }
 
-    public void stuckOverSearch(View view){
-        if (editTextComplete.getText().toString().isEmpty()){
+    public void stuckOverSearch(View view) {
+        if (editTextComplete.getText().toString().isEmpty()) {
             Toast.makeText(this, "A search-box is empty! ", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             presenter.find("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
         }
     }

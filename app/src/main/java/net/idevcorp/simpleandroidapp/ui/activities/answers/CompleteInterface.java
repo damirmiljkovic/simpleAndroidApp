@@ -1,4 +1,4 @@
-package net.idevcorp.simpleandroidapp.ui.activities;
+package net.idevcorp.simpleandroidapp.ui.activities.answers;
 
 
 import net.idevcorp.simpleandroidapp.models.AnswerModel;

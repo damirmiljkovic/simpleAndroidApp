@@ -1,7 +1,6 @@
-package net.idevcorp.simpleandroidapp.ui.activities;
+package net.idevcorp.simpleandroidapp.ui.activities.answers;
 
 import android.content.Intent;
-import android.icu.lang.UCharacter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -21,6 +20,8 @@ import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
 import net.idevcorp.simpleandroidapp.models.ItemModel;
 import net.idevcorp.simpleandroidapp.models.QuestionModel;
+import net.idevcorp.simpleandroidapp.ui.activities.InitialActivity;
+import net.idevcorp.simpleandroidapp.ui.activities.questions.QuestionActivity;
 import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 

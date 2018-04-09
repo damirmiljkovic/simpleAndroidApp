@@ -1,7 +1,6 @@
 package net.idevcorp.simpleandroidapp.ui.fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,9 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
-import net.idevcorp.simpleandroidapp.network.Endpoints;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
-import net.idevcorp.simpleandroidapp.ui.activities.CompleteActivity;
+import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteActivity;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 import retrofit2.Call;

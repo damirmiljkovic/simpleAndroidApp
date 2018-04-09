@@ -1,9 +1,7 @@
 package net.idevcorp.simpleandroidapp.ui.fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -23,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.ui.activities.CompleteActivity;
+import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteActivity;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 public class RegisterFragment extends Fragment {

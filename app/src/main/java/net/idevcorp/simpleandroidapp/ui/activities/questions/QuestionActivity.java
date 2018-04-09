@@ -1,4 +1,4 @@
-package net.idevcorp.simpleandroidapp.ui.activities;
+package net.idevcorp.simpleandroidapp.ui.activities.questions;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
 import net.idevcorp.simpleandroidapp.models.ItemQuestionModel;
 import net.idevcorp.simpleandroidapp.models.QuestionModel;
+import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteInterface;
+import net.idevcorp.simpleandroidapp.ui.activities.answers.CompletePresenter;
 import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
 
 import java.util.ArrayList;

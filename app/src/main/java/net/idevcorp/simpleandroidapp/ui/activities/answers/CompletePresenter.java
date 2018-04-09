@@ -1,8 +1,7 @@
-package net.idevcorp.simpleandroidapp.ui.activities;
+package net.idevcorp.simpleandroidapp.ui.activities.answers;
 
 
 import android.util.Log;
-import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
 import net.idevcorp.simpleandroidapp.models.QuestionModel;

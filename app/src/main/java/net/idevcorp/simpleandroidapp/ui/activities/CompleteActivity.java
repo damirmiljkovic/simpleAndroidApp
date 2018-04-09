@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
 import net.idevcorp.simpleandroidapp.models.ItemModel;
+import net.idevcorp.simpleandroidapp.models.QuestionModel;
 import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
@@ -44,10 +45,10 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
         auth = FirebaseAuth.getInstance();
         setTitle(SharedPreferencesManager.getEmail(this));
         editTextComplete = findViewById(R.id.editTextComplete);
-        textViewAnswer = findViewById(R.id.textViewAnswer);
+        //textViewAnswer = findViewById(R.id.textViewAnswer);
 
         presenter = new CompletePresenter(this);
-        presenter.find("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
+        presenter.findAnswer("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
 
         adapter = new AnswerItemsAdapter(itemModels);
         recyclerView = findViewById(R.id.recyclerViewComplete);
@@ -89,12 +90,21 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
 //        }
     }
 
+    @Override
+    public void onFindQuestion(QuestionModel questionModel) {
+
+    }
+
     public void stuckOverSearch(View view) {
         if (editTextComplete.getText().toString().isEmpty()) {
             Toast.makeText(this, "A search-box is empty! ", Toast.LENGTH_SHORT).show();
         } else {
-            presenter.find("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
+            presenter.findAnswer("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
         }
+    }
+    public void goForQuest(View view){
+        Intent intent = new Intent(getApplicationContext(),QuestionActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -10,21 +10,28 @@ import android.widget.TextView;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.ItemModel;
+import net.idevcorp.simpleandroidapp.models.ItemQuestionModel;
 
 import java.util.List;
 
 public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ItemModel> itemModels;
+    private List<ItemQuestionModel> questionItems;
 
     private static final int TYPE_REGISTERED   = 1;
     private static final int TYPE_UNREGISTERED = 2;
 
     private static final String REGISTERED = "registered";
 
+
     public AnswerItemsAdapter(List<ItemModel> itemModels) {
         this.itemModels = itemModels;
     }
+    public AnswerItemsAdapter(List<ItemQuestionModel> questionItems) {
+        this.questionItems = questionItems;
+    }
+
 
     @Nullable
     @Override

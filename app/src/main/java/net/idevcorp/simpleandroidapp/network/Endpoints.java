@@ -2,6 +2,7 @@ package net.idevcorp.simpleandroidapp.network;
 
 
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.QuestionModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -21,6 +22,8 @@ public interface Endpoints {
     @GET("answers")
     Call<AnswerModel> getAnswers(@Query("order") String order, @Query("sort") String sort,
                                  @Query("site") String site, @Query("tagged")String tags);
+    @GET("questions?order=desc&sort=activity&site=stackoverflow")
+    Call<QuestionModel> getQuestions();
 
 
 

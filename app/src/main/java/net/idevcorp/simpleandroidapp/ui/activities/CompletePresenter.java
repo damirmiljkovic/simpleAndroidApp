@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.QuestionModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 
 import retrofit2.Call;
@@ -19,7 +20,7 @@ public class CompletePresenter {
         this.completeInterface = completeInterface;
     }
 
-    public void find(String order, String sort, String site, String tags) {
+    public void findAnswer(String order, String sort, String site, String tags) {
         RetrofitBuilder.getInstance()
                 .getAnswers(order, sort, site, tags)
                 .enqueue(new Callback<AnswerModel>() {
@@ -30,6 +31,21 @@ public class CompletePresenter {
 
                     @Override
                     public void onFailure(Call<AnswerModel> call, Throwable t) {
+                        Log.i("errorMsg",t.toString());
+                    }
+                });
+    }
+    public void findQuestion(){
+        RetrofitBuilder.getInstance()
+                .getQuestions()
+                .enqueue(new Callback<QuestionModel>() {
+                    @Override
+                    public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
+                        completeInterface.onFindQuestion(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<QuestionModel> call, Throwable t) {
                         Log.i("errorMsg",t.toString());
                     }
                 });

@@ -49,7 +49,14 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itemList!=null?itemList.size():0;
     }
 }
 // TODO: 10.4.2018 implementirati recyclerView adapter za QuestionModel
+
+/* if(itemList!-null){
+return itemList.size()
+}else{
+return 0
+}
+*/

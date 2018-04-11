@@ -6,6 +6,7 @@ import java.util.List;
 
 public class QuestionModel {
 
+    @SerializedName("items")
     private List<ItemQuestionModel> itemQuestion;
     @SerializedName("has_more")
     private Boolean hasMore;

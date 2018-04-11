@@ -1,5 +1,7 @@
 package net.idevcorp.simpleandroidapp.ui.activities.questions;
 
+import android.util.Log;
+
 import net.idevcorp.simpleandroidapp.models.QuestionModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 
@@ -24,7 +26,7 @@ public class PresenterQuestion {
 
                     @Override
                     public void onFailure(Call<QuestionModel> call, Throwable t) {
-
+                        Log.e("failuer", t.getMessage(), t);
                     }
                 });
     }

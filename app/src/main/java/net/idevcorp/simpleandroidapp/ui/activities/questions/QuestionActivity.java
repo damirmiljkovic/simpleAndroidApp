@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.AnswerModel;
@@ -13,34 +14,31 @@ import net.idevcorp.simpleandroidapp.models.QuestionModel;
 import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteInterface;
 import net.idevcorp.simpleandroidapp.ui.activities.answers.CompletePresenter;
 import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
+import net.idevcorp.simpleandroidapp.ui.adapters.QuestionItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionActivity extends AppCompatActivity implements CompleteInterface {
+public class QuestionActivity extends AppCompatActivity implements QuestionInterface {
 
-    private CompletePresenter presenter;
-    private static final List<ItemQuestionModel> questionItems = new ArrayList<net.idevcorp.simpleandroidapp.models.ItemQuestionModel>();
-    private AnswerItemsAdapter answerItemsAdapter;
-    private RecyclerView recyclerView;
+    private PresenterQuestion presenterQuestion;
+    QuestionItemAdapter questionItemAdapter;
+    private static final List<ItemQuestionModel> questionItems = new ArrayList<>();
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
-        presenter = new CompletePresenter(this);
-        presenter.findQuestion();
 
-        answerItemsAdapter = new AnswerItemsAdapter(questionItems);
-        recyclerView = findViewById(R.id.recyclerViewComplete);
+        presenterQuestion = new PresenterQuestion(this);
+        presenterQuestion.findQuestion("desc","activity","stackoverflow","java");
+
+        questionItemAdapter = new QuestionItemAdapter(questionItems);
+        recyclerView = findViewById(R.id.recyclerViewQuestion);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(answerItemsAdapter);
-    }
-
-    @Override
-    public void onFindResult(AnswerModel result) {
-
+        recyclerView.setAdapter(questionItemAdapter);
     }
 
     @Override
@@ -48,7 +46,9 @@ public class QuestionActivity extends AppCompatActivity implements CompleteInter
         if (questionModel !=null){
             questionItems.clear();
             questionItems.addAll(questionModel.getItemQuestion());
+            questionItemAdapter.notifyDataSetChanged();
         }
 
     }
 }
+// TODO: 10.4.2018 ubaciti LayoutManager recyclerView u onCreate

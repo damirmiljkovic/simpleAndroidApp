@@ -25,6 +25,9 @@ public interface Endpoints {
     @GET("questions?order=desc&sort=activity&site=stackoverflow")
     Call<QuestionModel> getQuestions();
 
+    @GET("questions")
+    Call<QuestionModel> getQuestions(@Query("order") String order, @Query("sort") String sort,
+                                 @Query("site") String site, @Query("tagged")String tags);
 
 
 }

@@ -21,6 +21,8 @@
     <string name="button_complete">find contributors</string>
     <string name="question_activity_name">Question Activity</string>
     <string name="questions_button_name">go for questions!</string>
+    <string name="textviewQuestion">TextView</string>
+    <string name="textviewQuestionText">TextView</string>
 
 
 </resources>

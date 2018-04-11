@@ -91,10 +91,7 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
 //        }
     }
 
-    @Override
-    public void onFindQuestion(QuestionModel questionModel) {
 
-    }
 
     public void stuckOverSearch(View view) {
         if (editTextComplete.getText().toString().isEmpty()) {

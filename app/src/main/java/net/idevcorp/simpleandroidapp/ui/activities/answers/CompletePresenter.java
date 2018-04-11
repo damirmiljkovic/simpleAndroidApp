@@ -34,20 +34,6 @@ public class CompletePresenter {
                     }
                 });
     }
-    public void findQuestion(){
-        RetrofitBuilder.getInstance()
-                .getQuestions()
-                .enqueue(new Callback<QuestionModel>() {
-                    @Override
-                    public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
-                        completeInterface.onFindQuestion(response.body());
-                    }
 
-                    @Override
-                    public void onFailure(Call<QuestionModel> call, Throwable t) {
-                        Log.i("errorMsg",t.toString());
-                    }
-                });
-    }
 
 }

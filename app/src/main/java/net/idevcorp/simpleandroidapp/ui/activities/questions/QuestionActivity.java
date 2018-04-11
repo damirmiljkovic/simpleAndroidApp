@@ -37,13 +37,13 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
         recyclerView = findViewById(R.id.recyclerViewQuestion);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(questionItemAdapter);
     }
 
     @Override
     public void onFindQuestion(QuestionModel questionModel) {
-        if (questionModel !=null && questionModel.getItemQuestion()!=null){
+        if (questionModel !=null && questionModel.getItemQuestion() != null){
             questionItems.clear();
             questionItems.addAll(questionModel.getItemQuestion());
             questionItemAdapter.notifyDataSetChanged();

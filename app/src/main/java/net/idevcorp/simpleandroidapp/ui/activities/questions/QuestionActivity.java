@@ -28,7 +28,7 @@ import net.idevcorp.simpleandroidapp.ui.adapters.QuestionItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionActivity extends AppCompatActivity implements QuestionInterface {
+public class QuestionActivity extends AppCompatActivity implements QuestionInterface, QuestionItemAdapter.OnQuestionSelectedListener {
 
     private PresenterQuestion presenterQuestion;
     QuestionItemAdapter questionItemAdapter;
@@ -45,28 +45,28 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
         presenterQuestion = new PresenterQuestion(this);
         presenterQuestion.findQuestion("desc", "activity", editTextSearch.getText().toString(), "stackoverflow");
 
-        questionItemAdapter = new QuestionItemAdapter(questionItems);
+        questionItemAdapter = new QuestionItemAdapter(questionItems, this);
         recyclerView = findViewById(R.id.recyclerViewQuestion);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(questionItemAdapter);
-        recyclerView.addOnItemTouchListener(new RecyclerOnClickListener(getApplicationContext(), recyclerView,
-                new RecyclerOnClickListener.OnItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
-                        openAlertDialogue();
-                    }
-
-                    @Override
-                    public void onLongPress(View view, int position) {
-                        Toast.makeText(QuestionActivity.this, "Long Press!", Toast.LENGTH_LONG).show();
-                    }
-                }));
+//        recyclerView.addOnItemTouchListener(new RecyclerOnClickListener(getApplicationContext(), recyclerView,
+//                new RecyclerOnClickListener.OnItemClickListener() {
+//                    @Override
+//                    public void onClick(View view, int position) {
+//                        openAlertDialogue();
+//                    }
+//
+//                    @Override
+//                    public void onLongPress(View view, int position) {
+//                        Toast.makeText(QuestionActivity.this, "Long Press!", Toast.LENGTH_LONG).show();
+//                    }
+//                }));
 
     }
 
-    private void openAlertDialogue() {
+    private void openAlertDialogue(String urlToOpen) {
         new AlertDialog.Builder(QuestionActivity.this)
                 .setIcon(android.R.drawable.btn_star)
                 .setTitle("make a choice!")
@@ -110,4 +110,8 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
 
     }
 
+    @Override
+    public void onQuestionSelected(ItemQuestionModel question) {
+        openAlertDialogue(question.getLink());
+    }
 }

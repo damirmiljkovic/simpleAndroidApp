@@ -1,5 +1,6 @@
 package net.idevcorp.simpleandroidapp.ui.activities.questions;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import net.idevcorp.simpleandroidapp.models.QuestionModel;
@@ -15,18 +16,33 @@ public class PresenterQuestion {
     PresenterQuestion(QuestionInterface questionInterface){
         this.questionInterface = questionInterface;
     }
-    public void findQuestion(String order, String sort, String site, String tags){
+    public void findQuestion(String order, String sort, String tags, String site){
         RetrofitBuilder.getInstance()
-                .getQuestions(order,sort,site,tags)
+                .getQuestions(order,sort,tags,site)
                 .enqueue(new Callback<QuestionModel>() {
                     @Override
-                    public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
+                    public void onResponse(@NonNull Call<QuestionModel> call, @NonNull Response<QuestionModel> response) {
                         questionInterface.onFindQuestion(response.body());
                     }
 
                     @Override
-                    public void onFailure(Call<QuestionModel> call, Throwable t) {
+                    public void onFailure(@NonNull Call<QuestionModel> call, @NonNull Throwable t) {
                         Log.e("failuer", t.getMessage(), t);
+                    }
+                });
+    }
+    public void searchQuestion(String order, String sort, String title, String site){
+        RetrofitBuilder.getInstance()
+                .getSearchQuestion(order,sort,title,site)
+                .enqueue(new Callback<QuestionModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<QuestionModel> call, @NonNull Response<QuestionModel> response) {
+                        questionInterface.onFindQuestion(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<QuestionModel> call, @NonNull Throwable t) {
+
                     }
                 });
     }

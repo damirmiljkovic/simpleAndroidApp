@@ -1,5 +1,6 @@
 package net.idevcorp.simpleandroidapp.ui.adapters;
 
+import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.itemList = itemList;
     }
 
+
     public class MyHolder extends RecyclerView.ViewHolder{
         private TextView questionTextView;
         public MyHolder(View itemView) {
@@ -35,7 +37,6 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         View viewQuestion;
         viewQuestion = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_question,parent,false);
-
         return new MyHolder(viewQuestion);
     }
 
@@ -52,9 +53,8 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return itemList!=null?itemList.size():0;
     }
 }
-// TODO: 10.4.2018 implementirati recyclerView adapter za QuestionModel
 
-/* if(itemList!-null){
+/* if(itemList!=null){
 return itemList.size()
 }else{
 return 0

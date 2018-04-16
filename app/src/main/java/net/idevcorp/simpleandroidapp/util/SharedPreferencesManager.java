@@ -29,7 +29,4 @@ public class SharedPreferencesManager {
         PreferenceManager.getDefaultSharedPreferences(context).edit().clear().apply();
     }
 
-    //TODO implement saving user email in shared preferences
-    //TODO implement clear all shared preferences(when signing out)
-
 }

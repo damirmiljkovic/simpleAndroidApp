@@ -84,11 +84,7 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
             itemModels.addAll(result.getItems());
             adapter.notifyDataSetChanged();
         }
-//        textViewAnswer.setText(msgResult);
-//        for (int i=0; i<10;i++){
-//            msgResult = result.getItems().get(i).getOwner().getDisplayName()+", ";
-//            textViewAnswer.append(msgResult);
-//        }
+
     }
 
 

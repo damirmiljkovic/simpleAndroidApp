@@ -27,7 +27,9 @@ public interface Endpoints {
 
     @GET("questions")
     Call<QuestionModel> getQuestions(@Query("order") String order, @Query("sort") String sort,
-                                 @Query("site") String site, @Query("tagged")String tags);
-
+                                     @Query("tagged")String tags, @Query("site") String site);
+    @GET("search/advanced")
+    Call<QuestionModel> getSearchQuestion(@Query("order") String order, @Query("sort") String sort,
+                                       @Query("title") String title, @Query("site") String site);
 
 }

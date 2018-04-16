@@ -7,7 +7,7 @@ import java.util.List;
 public class QuestionModel {
 
     @SerializedName("items")
-    private List<ItemQuestionModel> itemQuestion;
+    private List<ItemQuestionModel> items;
     @SerializedName("has_more")
     private Boolean hasMore;
     @SerializedName("quota_max")
@@ -16,11 +16,11 @@ public class QuestionModel {
     private Integer quotaRemaining;
 
     public List<ItemQuestionModel> getItemQuestion() {
-        return itemQuestion;
+        return items;
     }
 
-    public void setItemQuestion(List<ItemQuestionModel> itemQuestion) {
-        this.itemQuestion = itemQuestion;
+    public void setItemQuestion(List<ItemQuestionModel> items) {
+        this.items = items;
     }
 
     public Boolean getHasMore() {

@@ -2,13 +2,14 @@ package net.idevcorp.simpleandroidapp.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemQuestionModel {
 
     private OwnerQuestionModel owner;
     @SerializedName("tags")
-    private List<String>tags;
+    private List<String> tags;
     @SerializedName("is_answered")
     private Boolean isAnswered;
     @SerializedName("view_count")

@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.answers.CompleteActivity" />
-        <activity android:name=".ui.activities.questions.QuestionActivity"></activity>
+        <activity android:name=".ui.activities.questions.QuestionActivity" />
+        <activity android:name=".ui.activities.questions.WebViewActivity"></activity>
     </application>
 
 </manifest>

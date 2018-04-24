@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.ItemQuestionModel;
@@ -21,6 +22,7 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public interface OnQuestionSelectedListener{
         void onQuestionSelected(ItemQuestionModel question);
+        void onButtonSelected(ItemQuestionModel question);
     }
 
     public QuestionItemAdapter(List<ItemQuestionModel> itemList,OnQuestionSelectedListener listener){
@@ -31,20 +33,20 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView questionTextView;
-        private ImageView deleteQuestion;
-        public MyHolder(View itemView) {
+        private ImageView shareQuestionButton;
+        private MyHolder(View itemView) {
             super(itemView);
             questionTextView = itemView.findViewById(R.id.textViewQuestionId);
-            deleteQuestion = itemView.findViewById(R.id.deleteQuestion);
+            shareQuestionButton = itemView.findViewById(R.id.shareQuestionButton);
         }
-        public void bindQuestion(ItemQuestionModel itemQuestion){
+        private void bindQuestion(ItemQuestionModel itemQuestion){
             questionTextView.setText(itemQuestion.getTitle());
             setEvents();
         }
 
         private void setEvents(){
             itemView.setOnClickListener(this);
-            deleteQuestion.setOnClickListener(this);
+            shareQuestionButton.setOnClickListener(this);
         }
 
         @Override
@@ -53,8 +55,8 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 case R.id.layout_question_root:
                     listener.onQuestionSelected(itemList.get(getAdapterPosition()));
                     break;
-                case R.id.deleteQuestion:
-                    //TODO implement click on image
+                case R.id.shareQuestionButton:
+                    listener.onButtonSelected(itemList.get(getAdapterPosition()));
                     break;
             }
         }

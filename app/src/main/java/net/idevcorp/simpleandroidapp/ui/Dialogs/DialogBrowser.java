@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,17 +17,19 @@ import net.idevcorp.simpleandroidapp.ui.activities.questions.WebViewActivity;
 
 public class DialogBrowser extends DialogFragment {
 
-    private static final String URL_QUESTION ="urlQuestion";
+    public static final String URL_QUESTION ="urlQuestion";
 
     public static DialogBrowser newInstance(String urlQuestion){
         DialogBrowser dialogBrowser = new DialogBrowser();
         Bundle bundle = new Bundle();
-        bundle.putString("urlQuestion",urlQuestion);
+        bundle.putString(URL_QUESTION,urlQuestion);
         dialogBrowser.setArguments(bundle);
         return dialogBrowser;
     }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final String LinkUrl = getArguments().getString(URL_QUESTION,"");
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setIcon(android.R.drawable.btn_star)
                 .setTitle(R.string.title_dialog)
@@ -34,12 +38,17 @@ public class DialogBrowser extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         switch (i){
                             case 0:
-                                Toast.makeText(getActivity(), "not ready yet!", Toast.LENGTH_SHORT).show();
+                                Intent intentBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(LinkUrl));
+                                startActivity(intentBrowser);
                                 break;
                             case 1:
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                     Intent intent = new Intent(getContext(),WebViewActivity.class);
-                                    intent.putExtra("urlQuestion",getArguments().getString(URL_QUESTION,""));
+                                    intent.putExtra(URL_QUESTION,LinkUrl);
+                                    startActivity(intent);
+                                }else {
+                                    Intent intent = new Intent(getActivity(),WebViewActivity.class);
+                                    intent.putExtra(URL_QUESTION,LinkUrl);
                                     startActivity(intent);
                                 }
                                 break;

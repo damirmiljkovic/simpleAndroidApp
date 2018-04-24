@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             android:id="@+id/layout_question_root"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_question_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_blue_light">
 
     <TextView
         android:id="@+id/textViewQuestionId"
-        android:layout_width="wrap_content"
+        android:layout_width="305dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/textviewQuestion"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <ImageView
-        android:id="@+id/deleteQuestion"
+        android:id="@+id/shareQuestionButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:contentDescription="@android:string/unknownName"
+        android:foregroundGravity="center_vertical"
+        android:paddingTop="10dp"
+        android:src="@android:drawable/ic_menu_share"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

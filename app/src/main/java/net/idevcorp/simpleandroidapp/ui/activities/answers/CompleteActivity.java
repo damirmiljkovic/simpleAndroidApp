@@ -73,6 +73,8 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
             SharedPreferencesManager.clearSavedPreferences(getApplicationContext());
             Intent intent = new Intent(getApplicationContext(), InitialActivity.class);
             startActivity(intent);
+        }else {
+            Toast.makeText(this, "My Profile", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

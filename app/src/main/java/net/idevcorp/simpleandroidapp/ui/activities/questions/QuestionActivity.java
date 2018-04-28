@@ -8,20 +8,24 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.models.ItemQuestionModel;
 import net.idevcorp.simpleandroidapp.models.QuestionModel;
 import net.idevcorp.simpleandroidapp.ui.Dialogs.DialogBrowser;
+import net.idevcorp.simpleandroidapp.ui.Dialogs.DialogProfile;
 import net.idevcorp.simpleandroidapp.ui.adapters.QuestionItemAdapter;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class QuestionActivity extends AppCompatActivity implements QuestionInterface, QuestionItemAdapter.OnQuestionSelectedListener {
 
@@ -69,7 +73,12 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
             presenterQuestion.searchQuestion("desc","activity",searchTag,"stackoverflow");
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             if (inputMethodManager != null ){
-                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+                try{
+                    inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),0);
+                }catch (Exception e){
+                    Log.i("msg",e.getMessage());
+                }
+
             }
         }
 
@@ -83,10 +92,20 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
     }
 
     @Override
-    public void onButtonSelected(ItemQuestionModel question) {
+    public void onShare(ItemQuestionModel question) {
         Intent intentShare = new Intent(Intent.ACTION_SEND);
         intentShare.setType("text/plain");
         intentShare.putExtra(Intent.EXTRA_TEXT,question.getLink());
         startActivity(Intent.createChooser(intentShare,"share link via:"));
     }
+
+    @Override
+    public void onProfile(ItemQuestionModel question) {
+        DialogProfile dialogProfile =DialogProfile
+                .newInstance(question.getOwner().getProfileImage()
+                        ,question.getOwner().getDisplayName()
+                        ,question.getOwner().getLink());
+        dialogProfile.show(getFragmentManager(),"profile");
+    }
 }
+// TODO: 24.4.2018 Ubaciti my Profile opciju u menu koja otvara profil korisnika u web view

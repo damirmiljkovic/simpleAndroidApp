@@ -1,11 +1,11 @@
-package net.idevcorp.simpleandroidapp.models;
-
+package net.idevcorp.simpleandroidapp.models.Questions;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OwnerModel {
+public class OwnerQuestionModel {
 
-    private Long reputation;
+    @SerializedName("reputation")
+    private Integer reputation;
     @SerializedName("user_id")
     private Long userId;
     @SerializedName("user_type")
@@ -17,11 +17,11 @@ public class OwnerModel {
     @SerializedName("link")
     private String link;
 
-    public Long getReputation() {
+    public Integer getReputation() {
         return reputation;
     }
 
-    public void setReputation(Long reputation) {
+    public void setReputation(Integer reputation) {
         this.reputation = reputation;
     }
 
@@ -65,11 +65,12 @@ public class OwnerModel {
         this.link = link;
     }
 
-    //        "reputation":14868,
-//                "user_id":6287910,
-//                "user_type":"registered",
-//                "profile_image":"https://www.gravatar.com/avatar/ba5244151f4f87b5ac81595cfff518de?s=128&d=identicon&r=PG&f=1",
-//                "display_name":"Cheticamp",
-//                "link":"https://stackoverflow.com/users/6287910/cheticamp"
+//    "owner": {
+//        "reputation": 10,
+//                "user_id": 7797962,
+//                "user_type": "registered",
+//                "profile_image": "https://lh6.googleusercontent.com/-ZrgTOUX7DWg/AAAAAAAAAAI/AAAAAAAAACI/3nVMRtmuWME/photo.jpg?sz=128",
+//                "display_name": "Tom Jones",
+//                "link": "https://stackoverflow.com/users/7797962/tom-jones"
 
-}
+    }

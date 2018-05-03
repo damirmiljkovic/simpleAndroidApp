@@ -1,12 +1,12 @@
 package net.idevcorp.simpleandroidapp.network;
 
 
-import net.idevcorp.simpleandroidapp.models.AnswerModel;
-import net.idevcorp.simpleandroidapp.models.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.Answers.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.Questions.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.Users.UserModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -31,5 +31,7 @@ public interface Endpoints {
     @GET("search/advanced")
     Call<QuestionModel> getSearchQuestion(@Query("order") String order, @Query("sort") String sort,
                                        @Query("title") String title, @Query("site") String site);
+    @GET("users/{ids}")
+    Call<UserModel> getUser(@Path("ids") long ids,@Query("order") String order, @Query("sort") String sort, @Query("site") String site);
 
 }

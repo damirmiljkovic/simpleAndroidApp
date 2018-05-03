@@ -11,18 +11,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.AnswerModel;
-import net.idevcorp.simpleandroidapp.models.ItemModel;
-import net.idevcorp.simpleandroidapp.models.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.Answers.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.Answers.ItemModel;
 import net.idevcorp.simpleandroidapp.ui.activities.InitialActivity;
+import net.idevcorp.simpleandroidapp.ui.activities.Users.UserActivity;
 import net.idevcorp.simpleandroidapp.ui.activities.questions.QuestionActivity;
 import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
+import net.idevcorp.simpleandroidapp.ui.interfaces.CompleteInterface;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
@@ -31,7 +31,6 @@ import java.util.List;
 public class CompleteActivity extends AppCompatActivity implements CompleteInterface {
 
     FirebaseAuth auth;
-    TextView     textViewAnswer;
     EditText     editTextComplete;
     String msgResult = "";
     private CompletePresenter presenter;
@@ -46,7 +45,6 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
         auth = FirebaseAuth.getInstance();
         setTitle(SharedPreferencesManager.getEmail(this));
         editTextComplete = findViewById(R.id.editTextComplete);
-        //textViewAnswer = findViewById(R.id.textViewAnswer);
 
         presenter = new CompletePresenter(this);
         presenter.findAnswer("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
@@ -74,7 +72,8 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
             Intent intent = new Intent(getApplicationContext(), InitialActivity.class);
             startActivity(intent);
         }else {
-            Toast.makeText(this, "My Profile", Toast.LENGTH_SHORT).show();
+              Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+              startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

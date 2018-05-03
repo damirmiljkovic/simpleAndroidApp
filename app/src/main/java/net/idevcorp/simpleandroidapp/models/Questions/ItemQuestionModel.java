@@ -1,8 +1,7 @@
-package net.idevcorp.simpleandroidapp.models;
+package net.idevcorp.simpleandroidapp.models.Questions;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemQuestionModel {

@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.ItemModel;
-import net.idevcorp.simpleandroidapp.models.ItemQuestionModel;
+import net.idevcorp.simpleandroidapp.models.Answers.ItemModel;
 
 import java.util.List;
 

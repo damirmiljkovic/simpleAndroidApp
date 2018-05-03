@@ -3,8 +3,9 @@ package net.idevcorp.simpleandroidapp.ui.activities.questions;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import net.idevcorp.simpleandroidapp.models.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.Questions.QuestionModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
+import net.idevcorp.simpleandroidapp.ui.interfaces.QuestionInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;

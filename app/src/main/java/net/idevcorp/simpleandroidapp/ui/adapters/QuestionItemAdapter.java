@@ -3,7 +3,6 @@ package net.idevcorp.simpleandroidapp.ui.adapters;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.ItemQuestionModel;
+import net.idevcorp.simpleandroidapp.models.Questions.ItemQuestionModel;
 
 import java.util.List;
 

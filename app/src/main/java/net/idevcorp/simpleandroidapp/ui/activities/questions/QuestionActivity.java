@@ -1,8 +1,6 @@
 package net.idevcorp.simpleandroidapp.ui.activities.questions;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,15 +10,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.ItemQuestionModel;
-import net.idevcorp.simpleandroidapp.models.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.Questions.ItemQuestionModel;
+import net.idevcorp.simpleandroidapp.models.Questions.QuestionModel;
 import net.idevcorp.simpleandroidapp.ui.Dialogs.DialogBrowser;
 import net.idevcorp.simpleandroidapp.ui.Dialogs.DialogProfile;
 import net.idevcorp.simpleandroidapp.ui.adapters.QuestionItemAdapter;
+import net.idevcorp.simpleandroidapp.ui.interfaces.QuestionInterface;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 import java.util.ArrayList;

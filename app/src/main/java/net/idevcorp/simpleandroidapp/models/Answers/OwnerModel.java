@@ -1,11 +1,11 @@
-package net.idevcorp.simpleandroidapp.models;
+package net.idevcorp.simpleandroidapp.models.Answers;
+
 
 import com.google.gson.annotations.SerializedName;
 
-public class OwnerQuestionModel {
+public class OwnerModel {
 
-    @SerializedName("reputation")
-    private Integer reputation;
+    private Long reputation;
     @SerializedName("user_id")
     private Long userId;
     @SerializedName("user_type")
@@ -17,11 +17,11 @@ public class OwnerQuestionModel {
     @SerializedName("link")
     private String link;
 
-    public Integer getReputation() {
+    public Long getReputation() {
         return reputation;
     }
 
-    public void setReputation(Integer reputation) {
+    public void setReputation(Long reputation) {
         this.reputation = reputation;
     }
 
@@ -65,12 +65,11 @@ public class OwnerQuestionModel {
         this.link = link;
     }
 
-//    "owner": {
-//        "reputation": 10,
-//                "user_id": 7797962,
-//                "user_type": "registered",
-//                "profile_image": "https://lh6.googleusercontent.com/-ZrgTOUX7DWg/AAAAAAAAAAI/AAAAAAAAACI/3nVMRtmuWME/photo.jpg?sz=128",
-//                "display_name": "Tom Jones",
-//                "link": "https://stackoverflow.com/users/7797962/tom-jones"
+    //        "reputation":14868,
+//                "user_id":6287910,
+//                "user_type":"registered",
+//                "profile_image":"https://www.gravatar.com/avatar/ba5244151f4f87b5ac81595cfff518de?s=128&d=identicon&r=PG&f=1",
+//                "display_name":"Cheticamp",
+//                "link":"https://stackoverflow.com/users/6287910/cheticamp"
 
-    }
+}

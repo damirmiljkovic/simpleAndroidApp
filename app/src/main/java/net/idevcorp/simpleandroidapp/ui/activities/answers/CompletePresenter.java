@@ -3,9 +3,9 @@ package net.idevcorp.simpleandroidapp.ui.activities.answers;
 
 import android.util.Log;
 
-import net.idevcorp.simpleandroidapp.models.AnswerModel;
-import net.idevcorp.simpleandroidapp.models.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.Answers.AnswerModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
+import net.idevcorp.simpleandroidapp.ui.interfaces.CompleteInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;

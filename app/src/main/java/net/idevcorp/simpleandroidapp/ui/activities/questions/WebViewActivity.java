@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 import android.support.v7.widget.ShareActionProvider;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.ui.Dialogs.DialogBrowser;
+import net.idevcorp.simpleandroidapp.ui.dialogs.DialogBrowser;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 public class WebViewActivity extends AppCompatActivity {

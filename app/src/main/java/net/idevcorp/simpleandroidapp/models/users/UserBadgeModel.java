@@ -1,4 +1,4 @@
-package net.idevcorp.simpleandroidapp.models.Users;
+package net.idevcorp.simpleandroidapp.models.users;
 
 import com.google.gson.annotations.SerializedName;
 

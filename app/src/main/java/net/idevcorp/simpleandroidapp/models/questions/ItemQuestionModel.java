@@ -1,4 +1,4 @@
-package net.idevcorp.simpleandroidapp.models.Questions;
+package net.idevcorp.simpleandroidapp.models.questions;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -13,10 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.Questions.ItemQuestionModel;
-import net.idevcorp.simpleandroidapp.models.Questions.QuestionModel;
-import net.idevcorp.simpleandroidapp.ui.Dialogs.DialogBrowser;
-import net.idevcorp.simpleandroidapp.ui.Dialogs.DialogProfile;
+import net.idevcorp.simpleandroidapp.models.questions.ItemQuestionModel;
+import net.idevcorp.simpleandroidapp.models.questions.QuestionModel;
+import net.idevcorp.simpleandroidapp.ui.dialogs.DialogBrowser;
+import net.idevcorp.simpleandroidapp.ui.dialogs.DialogProfile;
 import net.idevcorp.simpleandroidapp.ui.adapters.QuestionItemAdapter;
 import net.idevcorp.simpleandroidapp.ui.interfaces.QuestionInterface;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;

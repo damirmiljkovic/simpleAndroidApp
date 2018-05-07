@@ -1,9 +1,9 @@
 package net.idevcorp.simpleandroidapp.network;
 
 
-import net.idevcorp.simpleandroidapp.models.Answers.AnswerModel;
-import net.idevcorp.simpleandroidapp.models.Questions.QuestionModel;
-import net.idevcorp.simpleandroidapp.models.Users.UserModel;
+import net.idevcorp.simpleandroidapp.models.answers.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.questions.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.users.UserModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

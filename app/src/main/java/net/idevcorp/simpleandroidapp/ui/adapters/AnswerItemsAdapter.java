@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.Answers.ItemModel;
+import net.idevcorp.simpleandroidapp.models.answers.ItemModel;
 
 import java.util.List;
 
@@ -59,12 +59,13 @@ public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (itemModels.get(position).getOwner().getUserType().equals(REGISTERED))
-            return TYPE_REGISTERED;
-        else if (itemModels.get(position).getOwner().getUserType().equals("unregistered")) {
-            return TYPE_UNREGISTERED;
-        } else {
-            return super.getItemViewType(position);
+        switch (itemModels.get(position).getOwner().getUserType()) {
+            case REGISTERED:
+                return TYPE_REGISTERED;
+            case "unregistered":
+                return TYPE_UNREGISTERED;
+            default:
+                return super.getItemViewType(position);
         }
     }
 
@@ -82,13 +83,13 @@ public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         private TextView displayName;
         private TextView text;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             displayName = itemView.findViewById(R.id.textViewDisplayName);
             text = itemView.findViewById(R.id.layout_display_text);
         }
 
-        public void bind(ItemModel itemModel) {
+        void bind(ItemModel itemModel) {
             displayName.setText(itemModel.getOwner().getDisplayName());
             text.setText(itemModel.getOwner().getUserType());
         }
@@ -99,12 +100,12 @@ public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         private TextView displayName;
 
-        public MySecondViewHolder(View itemView) {
+        MySecondViewHolder(View itemView) {
             super(itemView);
             displayName = itemView.findViewById(R.id.textViewDisplayName);
         }
 
-        public void bind(ItemModel itemModel) {
+        void bind(ItemModel itemModel) {
             displayName.setText(itemModel.getOwner().getDisplayName());
         }
 

@@ -1,4 +1,4 @@
-package net.idevcorp.simpleandroidapp.ui.Dialogs;
+package net.idevcorp.simpleandroidapp.ui.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,11 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.ui.activities.questions.QuestionActivity;
 import net.idevcorp.simpleandroidapp.ui.activities.questions.WebViewActivity;
 
 public class DialogBrowser extends DialogFragment {

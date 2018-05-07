@@ -1,18 +1,16 @@
-package net.idevcorp.simpleandroidapp.ui.activities.Users;
+package net.idevcorp.simpleandroidapp.ui.activities.users;
 
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.Users.UserItemModel;
-import net.idevcorp.simpleandroidapp.models.Users.UserModel;
+import net.idevcorp.simpleandroidapp.models.users.UserItemModel;
+import net.idevcorp.simpleandroidapp.models.users.UserModel;
 import net.idevcorp.simpleandroidapp.ui.interfaces.UserInterface;
 
 import java.util.ArrayList;
@@ -39,7 +37,6 @@ public class UserActivity extends AppCompatActivity implements UserInterface {
         profileImage = findViewById(R.id.imageViewMyProfile);
         userPresenter = new UserPresenter(this);
         userPresenter.findUser(9128363,"desc","reputation","stackoverflow");
-
 
     }
 

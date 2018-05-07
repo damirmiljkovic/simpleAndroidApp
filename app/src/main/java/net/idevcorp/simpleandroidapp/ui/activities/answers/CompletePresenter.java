@@ -1,9 +1,10 @@
 package net.idevcorp.simpleandroidapp.ui.activities.answers;
 
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
-import net.idevcorp.simpleandroidapp.models.Answers.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.answers.AnswerModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 import net.idevcorp.simpleandroidapp.ui.interfaces.CompleteInterface;
 
@@ -24,12 +25,12 @@ public class CompletePresenter {
                 .getAnswers(order, sort, site, tags)
                 .enqueue(new Callback<AnswerModel>() {
                     @Override
-                    public void onResponse(Call<AnswerModel> call, Response<AnswerModel> response) {
+                    public void onResponse(@NonNull Call<AnswerModel> call, @NonNull Response<AnswerModel> response) {
                         completeInterface.onFindResult(response.body());
                     }
 
                     @Override
-                    public void onFailure(Call<AnswerModel> call, Throwable t) {
+                    public void onFailure(Call<AnswerModel> call, @NonNull Throwable t) {
                         Log.i("errorMsg",t.toString());
                     }
                 });

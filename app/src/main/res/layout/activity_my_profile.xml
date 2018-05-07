@@ -4,36 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.users.UserActivity">
+    tools:context=".ui.activities.users.MyProfileActivity">
 
     <LinearLayout
-        android:id="@+id/layoutMyProfile"
+        android:id="@+id/layoutMyProfileFire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageViewMyProfile"
+            android:id="@+id/imageViewMyProfileFire"
             android:layout_width="@android:dimen/thumbnail_height"
             android:layout_height="@android:dimen/thumbnail_width"
             android:layout_margin="@dimen/tendp"
             android:contentDescription="@android:string/unknownName"
             app:srcCompat="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/textViewNameMyProfile"
+        <EditText
+            android:id="@+id/editTextUserMyPrifile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/tendp"
+            android:labelFor="@id/editTextUserMyPrifile"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="textPersonName"
             android:text="@android:string/unknownName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textViewReputMyProfile"
+            android:id="@+id/textViewNameMyProfileFire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/tendp"
@@ -41,13 +41,27 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
         <TextView
-            android:id="@+id/textViewLinkMyProfile"
+            android:id="@+id/textViewSurnameMyProfileFire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/tendp"
-            android:autoLink="web"
+            android:text="@android:string/unknownName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <TextView
+            android:id="@+id/textViewMailMyProfileFire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tendp"
+            android:text="@android:string/unknownName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <TextView
+            android:id="@+id/textViewLinkMyProfileFire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/tendp"
             android:text="@android:string/unknownName"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

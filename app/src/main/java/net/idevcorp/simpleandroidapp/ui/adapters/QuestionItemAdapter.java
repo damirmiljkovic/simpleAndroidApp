@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.Questions.ItemQuestionModel;
+import net.idevcorp.simpleandroidapp.models.questions.ItemQuestionModel;
 
 import java.util.List;
 

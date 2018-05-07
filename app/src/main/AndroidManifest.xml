@@ -24,7 +24,8 @@
         <activity android:name=".ui.activities.answers.CompleteActivity" />
         <activity android:name=".ui.activities.questions.QuestionActivity" />
         <activity android:name=".ui.activities.questions.WebViewActivity" />
-        <activity android:name=".ui.activities.Users.UserActivity"></activity>
+        <activity android:name=".ui.activities.users.UserActivity" />
+        <activity android:name=".ui.activities.users.MyProfileActivity" />
     </application>
 
 </manifest>

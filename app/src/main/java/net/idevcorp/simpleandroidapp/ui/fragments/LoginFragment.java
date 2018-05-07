@@ -22,7 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.Answers.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.answers.AnswerModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteActivity;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
@@ -94,6 +94,8 @@ public class LoginFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxLogin.isChecked());
                                 SharedPreferencesManager.setEmail(getActivity(), task.getResult().getUser().getEmail());
+                                SharedPreferencesManager.setUser(getActivity(),task.getResult().getUser().getDisplayName());
+                                SharedPreferencesManager.setUri(getActivity(),task.getResult().getUser().getPhotoUrl().toString());
                                 Intent intent = new Intent(getContext(), CompleteActivity.class);
                                 startActivity(intent);
                             } else {

@@ -1,8 +1,9 @@
-package net.idevcorp.simpleandroidapp.ui.activities.Users;
+package net.idevcorp.simpleandroidapp.ui.activities.users;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
-import net.idevcorp.simpleandroidapp.models.Users.UserModel;
+import net.idevcorp.simpleandroidapp.models.users.UserModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 import net.idevcorp.simpleandroidapp.ui.interfaces.UserInterface;
 
@@ -21,12 +22,12 @@ public class UserPresenter {
                 .getUser(ids,order,sort,site)
                 .enqueue(new Callback<UserModel>() {
                     @Override
-                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                    public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                         userInterface.onFindUser(response.body());
                     }
 
                     @Override
-                    public void onFailure(Call<UserModel> call, Throwable t) {
+                    public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
                         Log.i("errorMsg",t.getMessage());
 
                     }

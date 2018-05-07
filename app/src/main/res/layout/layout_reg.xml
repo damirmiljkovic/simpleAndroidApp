@@ -34,19 +34,11 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/editTextFirstNameId"
+        android:id="@+id/editTextUserReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/first_name"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editTextLastNameID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/last_name"
+        android:hint="@string/username_asterix"
         android:inputType="textPersonName" />
 
     <CheckBox

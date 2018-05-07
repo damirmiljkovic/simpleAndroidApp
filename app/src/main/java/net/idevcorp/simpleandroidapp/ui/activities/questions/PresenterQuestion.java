@@ -3,7 +3,7 @@ package net.idevcorp.simpleandroidapp.ui.activities.questions;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import net.idevcorp.simpleandroidapp.models.Questions.QuestionModel;
+import net.idevcorp.simpleandroidapp.models.questions.QuestionModel;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 import net.idevcorp.simpleandroidapp.ui.interfaces.QuestionInterface;
 

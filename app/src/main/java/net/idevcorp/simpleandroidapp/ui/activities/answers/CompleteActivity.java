@@ -16,10 +16,11 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.models.Answers.AnswerModel;
-import net.idevcorp.simpleandroidapp.models.Answers.ItemModel;
+import net.idevcorp.simpleandroidapp.models.answers.AnswerModel;
+import net.idevcorp.simpleandroidapp.models.answers.ItemModel;
 import net.idevcorp.simpleandroidapp.ui.activities.InitialActivity;
-import net.idevcorp.simpleandroidapp.ui.activities.Users.UserActivity;
+import net.idevcorp.simpleandroidapp.ui.activities.users.MyProfileActivity;
+import net.idevcorp.simpleandroidapp.ui.activities.users.UserActivity;
 import net.idevcorp.simpleandroidapp.ui.activities.questions.QuestionActivity;
 import net.idevcorp.simpleandroidapp.ui.adapters.AnswerItemsAdapter;
 import net.idevcorp.simpleandroidapp.ui.interfaces.CompleteInterface;
@@ -43,7 +44,7 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete);
         auth = FirebaseAuth.getInstance();
-        setTitle(SharedPreferencesManager.getEmail(this));
+        setTitle("Contributors");
         editTextComplete = findViewById(R.id.editTextComplete);
 
         presenter = new CompletePresenter(this);
@@ -72,7 +73,7 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
             Intent intent = new Intent(getApplicationContext(), InitialActivity.class);
             startActivity(intent);
         }else {
-              Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+              Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
               startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

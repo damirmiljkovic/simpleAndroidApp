@@ -72,7 +72,9 @@ public class LoginFragment extends Fragment {
             @Override
             public void onResponse(Call<AnswerModel> call, Response<AnswerModel> response) {
                 //dobili smo rezultat
-                Log.e("test", response.body().getItems().toString());
+                if (response.body() != null) {
+                    Log.e("test", response.body().getItems().toString());
+                }
             }
 
             @Override

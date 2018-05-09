@@ -75,7 +75,9 @@ public class RegisterFragment extends Fragment {
                             if (task.isSuccessful()){
                                 FirebaseUser currentUser = task.getResult().getUser();
                                 UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(editTextRegisterUser.getText().toString()).build();
+                                        .setDisplayName(editTextRegisterUser.getText().toString())
+                                        .setPhotoUri(Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+ R.drawable.avatar2))
+                                        .build();
                                 currentUser.updateProfile(profileChangeRequest);
                                 SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxRegister.isChecked());
                                 SharedPreferencesManager.setEmail(getActivity(),task.getResult().getUser().getEmail());

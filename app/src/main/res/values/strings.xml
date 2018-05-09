@@ -31,10 +31,10 @@
     <string name="username_asterix">username*</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="done">DONE</string>
+    <string name="photo_picker_caption">Choose your avatar by long pressing on it!</string>
     <string-array name="dialog_array">
         <item>Browser</item>
         <item>App</item>
     </string-array>
-
 
 </resources>

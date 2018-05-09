@@ -2,4 +2,5 @@
 <resources>
     <dimen name="okvir">350dp</dimen>
     <dimen name="tendp">10dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
 </resources>

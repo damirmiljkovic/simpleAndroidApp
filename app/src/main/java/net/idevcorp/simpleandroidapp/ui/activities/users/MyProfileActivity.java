@@ -1,9 +1,8 @@
 package net.idevcorp.simpleandroidapp.ui.activities.users;
 
-import android.content.res.AssetManager;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,11 +17,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.squareup.picasso.Picasso;
 
 import net.idevcorp.simpleandroidapp.R;
+import net.idevcorp.simpleandroidapp.ui.dialogs.DialogPhotoPicker;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
-
-import java.io.File;
-
-import static net.idevcorp.simpleandroidapp.R.drawable.avatar1;
 
 public class MyProfileActivity extends AppCompatActivity {
 
@@ -33,7 +29,7 @@ public class MyProfileActivity extends AppCompatActivity {
     TextView textViewMail;
     TextView textViewLink;
     FirebaseAuth auth;
-    Uri uriProfileImage;
+    public static Uri uriProfileImage;
     MenuItem menuItemEdit;
     MenuItem menuItemEditDone;
 
@@ -49,34 +45,34 @@ public class MyProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menuItemEditProfile){
-            Toast.makeText(getApplicationContext(), "Change  photo or display name by tapping on it!", Toast.LENGTH_LONG).show();
-            editFieldsToggle(0.5f,true);
-            imageViewProfileImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    uriProfileImage = Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+R.drawable.avatar1);
-
+        switch (item.getItemId()){
+            case R.id.menuItemEditProfile:
+                Toast.makeText(getApplicationContext(), "Change  photo or display name by tapping on it!", Toast.LENGTH_LONG).show();
+                editFieldsToggle(0.5f,true);
+                imageViewProfileImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DialogPhotoPicker dialogPhotoPicker = new DialogPhotoPicker();
+                        dialogPhotoPicker.show(getFragmentManager(),"picker");
+                    }
+                });
+                break;
+            case R.id.menuItemEditFinished:
+                editFieldsToggle(1f,false);
+                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(editTextUser.getText().toString())
+                        .setPhotoUri(uriProfileImage)
+                        .build();
+                if (profileChangeRequest != null){
                     Picasso.get().load(uriProfileImage).into(imageViewProfileImage);
-
+                    auth.getCurrentUser().updateProfile(profileChangeRequest);
+                    SharedPreferencesManager.setUri(getApplicationContext(), String.valueOf(uriProfileImage));
+                    SharedPreferencesManager.setUser(getApplicationContext(),editTextUser.getText().toString());
+                    Toast.makeText(getApplicationContext(), "editing done", Toast.LENGTH_LONG).show();
                 }
-            });
-        }else {
-            editFieldsToggle(1f,false);
-            Toast.makeText(getApplicationContext(), "editing done", Toast.LENGTH_LONG).show();
-            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(editTextUser.getText().toString())
-                    .setPhotoUri(uriProfileImage)
-                    .build();
-            if (profileChangeRequest != null){
-                auth.getCurrentUser().updateProfile(profileChangeRequest);
-            }
+                break;
+               }
 
-
-            SharedPreferencesManager.setUri(getApplicationContext(), String.valueOf(uriProfileImage));
-            SharedPreferencesManager.setUser(getApplicationContext(),editTextUser.getText().toString());
-
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -97,7 +93,7 @@ public class MyProfileActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         imageViewProfileImage = findViewById(R.id.imageViewMyProfileFire);
-        editTextUser = findViewById(R.id.editTextUserMyPrifile);
+        editTextUser = findViewById(R.id.editTextUserMyProfile);
         editTextUser.setEnabled(false);
         textViewName = findViewById(R.id.textViewNameMyProfileFire);
         textViewSurname = findViewById(R.id.textViewSurnameMyProfileFire);

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="81dp">
+
+    <LinearLayout
+        android:id="@+id/layoutDialogImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewPhotoPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/tendp"
+            android:text="@string/photo_picker_caption"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <ViewFlipper
+            android:id="@+id/viewFlipperMyProfile"
+            android:layout_width="@android:dimen/thumbnail_width"
+            android:layout_height="@android:dimen/thumbnail_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/tendp"
+            tools:layout_editor_absoluteX="96dp"
+            tools:layout_editor_absoluteY="164dp">
+
+        </ViewFlipper>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

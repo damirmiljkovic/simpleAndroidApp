@@ -27,26 +27,12 @@
             android:layout_margin="@dimen/tendp"
             android:background="@android:color/transparent"
             android:ems="10"
-            android:labelFor="@id/editTextUserMyProfile"
+            android:hint="@android:string/unknownName"
             android:inputType="textPersonName"
+            android:labelFor="@id/editTextUserMyProfile"
             android:text="@android:string/unknownName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-        <TextView
-            android:id="@+id/textViewNameMyProfileFire"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/tendp"
-            android:text="@android:string/unknownName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-        <TextView
-            android:id="@+id/textViewSurnameMyProfileFire"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/tendp"
-            android:text="@android:string/unknownName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@drawable/edit_text_selector" />
 
         <TextView
             android:id="@+id/textViewMailMyProfileFire"
@@ -61,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/tendp"
-            android:text="@android:string/unknownName"
+            android:text="@string/link"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

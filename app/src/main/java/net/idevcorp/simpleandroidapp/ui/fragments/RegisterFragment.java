@@ -35,6 +35,7 @@ public class RegisterFragment extends Fragment {
     private FirebaseAuth auth;
     private Button buttonRegister;
     private CheckBox checkBoxRegister;
+    public static Uri uriProfileImage;
 
     @Nullable
     @Override
@@ -49,6 +50,7 @@ public class RegisterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         auth = FirebaseAuth.getInstance();
         PreferenceManager.getDefaultSharedPreferences(getActivity());
+        uriProfileImage = Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+ R.drawable.avatar1);
         editTextRegisterMail = view.findViewById(R.id.editTextMailId);
         editTextRegisterPass = view.findViewById(R.id.editTextPassId);
         editTextRegisterUser = view.findViewById(R.id.editTextUserReg);
@@ -76,13 +78,13 @@ public class RegisterFragment extends Fragment {
                                 FirebaseUser currentUser = task.getResult().getUser();
                                 UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(editTextRegisterUser.getText().toString())
-                                        .setPhotoUri(Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+ R.drawable.avatar2))
+                                        .setPhotoUri(uriProfileImage)
                                         .build();
                                 currentUser.updateProfile(profileChangeRequest);
                                 SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxRegister.isChecked());
                                 SharedPreferencesManager.setEmail(getActivity(),task.getResult().getUser().getEmail());
                                 SharedPreferencesManager.setUser(getActivity(),editTextRegisterUser.getText().toString());
-                                SharedPreferencesManager.setUri(getActivity(), String.valueOf(Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+ R.drawable.avatar2)));
+                                SharedPreferencesManager.setUri(getActivity(), String.valueOf(uriProfileImage));
                                 Intent intent = new Intent(getContext(),CompleteActivity.class);
                                 startActivity(intent);
                             }else{

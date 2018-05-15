@@ -25,15 +25,16 @@ import java.util.Objects;
 
 public class MyProfileActivity extends AppCompatActivity {
 
-    ImageView imageViewProfileImage;
-    EditText editTextUser;
-    TextView textViewName;
-    TextView textViewSurname;
-    TextView textViewMail;
-    TextView textViewLink;
+    ImageView    imageViewProfileImage;
+    EditText     editTextUser;
+    TextView     textViewName;
+    TextView     textViewSurname;
+    TextView     textViewMail;
+    TextView     textViewLink;
     FirebaseAuth auth;
-    MenuItem menuItemEdit;
-    MenuItem menuItemEditDone;
+    MenuItem     menuItemEdit;
+    MenuItem     menuItemEditDone;
+    private Uri profileImage;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,25 +48,33 @@ public class MyProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menuItemEditProfile:
                 setTitle("finish edit with DONE >>");
                 Toast.makeText(getApplicationContext(), "Change  photo or display name by tapping on it!", Toast.LENGTH_LONG).show();
-                editFieldsToggle(0.5f,true);
+                editFieldsToggle(0.5f, true);
                 imageViewProfileImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         DialogPhotoPicker dialogPhotoPicker = new DialogPhotoPicker();
-                        dialogPhotoPicker.show(getFragmentManager(),"picker");
+                        dialogPhotoPicker.setOnImageSelectedListener(new DialogPhotoPicker.OnImageSelectedListener() {
+                            @Override
+                            public void imageSelected(Uri image) {
+                                profileImage = image;
+                                Picasso.get().load(profileImage).into(imageViewProfileImage);
+
+                            }
+                        });
+                        dialogPhotoPicker.show(getSupportFragmentManager(), "picker");
                     }
                 });
                 break;
             case R.id.menuItemEditFinished:
                 setTitle("My Profile");
-                editFieldsToggle(1f,false);
+                editFieldsToggle(1f, false);
                 UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                         .setDisplayName(editTextUser.getText().toString())
-                        .setPhotoUri(RegisterFragment.uriProfileImage)
+                        .setPhotoUri(profileImage)
                         .build();
 
                 try {
@@ -73,13 +82,13 @@ public class MyProfileActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                    SharedPreferencesManager.setUri(getApplicationContext(), String.valueOf(RegisterFragment.uriProfileImage));
-                    SharedPreferencesManager.setUser(getApplicationContext(),editTextUser.getText().toString());
-                    Picasso.get().load(Uri.parse(SharedPreferencesManager.getUri(getApplicationContext()))).into(imageViewProfileImage);
-                    Toast.makeText(getApplicationContext(), "editing done", Toast.LENGTH_LONG).show();
+                SharedPreferencesManager.setUri(getApplicationContext(), String.valueOf(profileImage));
+                SharedPreferencesManager.setUser(getApplicationContext(), editTextUser.getText().toString());
+                Picasso.get().load(Uri.parse(SharedPreferencesManager.getUri(getApplicationContext()))).into(imageViewProfileImage);
+                Toast.makeText(getApplicationContext(), "editing done", Toast.LENGTH_LONG).show();
 
                 break;
-               }
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -108,8 +117,6 @@ public class MyProfileActivity extends AppCompatActivity {
         Picasso.get().load(Uri.parse(SharedPreferencesManager.getUri(getApplicationContext()))).into(imageViewProfileImage);
         editTextUser.setText(SharedPreferencesManager.getUser(getApplicationContext()));
         textViewMail.setText(SharedPreferencesManager.getEmail(getApplicationContext()));
-
-
 
 
     }

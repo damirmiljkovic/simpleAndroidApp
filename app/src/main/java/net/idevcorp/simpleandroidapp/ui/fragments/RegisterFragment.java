@@ -54,7 +54,6 @@ public class RegisterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         auth = FirebaseAuth.getInstance();
         PreferenceManager.getDefaultSharedPreferences(getActivity());
-        uriProfileImage = Uri.parse("android.resource://net.idevcorp.simpleandroidapp/" + R.drawable.avatar1);
         editTextRegisterMail = view.findViewById(R.id.editTextMailId);
         editTextRegisterPass = view.findViewById(R.id.editTextPassId);
         editTextRegisterUser = view.findViewById(R.id.editTextUserReg);
@@ -87,8 +86,10 @@ public class RegisterFragment extends Fragment {
 
     private void createUserFirebase() {
 
-        if (editTextRegisterMail.getText().toString().isEmpty() || editTextRegisterPass.getText().toString().isEmpty()) {
-            Toast.makeText(getActivity(), "Empty field(s)!", Toast.LENGTH_SHORT).show();
+        if (editTextRegisterMail.getText().toString().isEmpty()
+                || editTextRegisterPass.getText().toString().isEmpty()
+                || editTextRegisterUser.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), R.string.empty_fields, Toast.LENGTH_SHORT).show();
         } else {
             auth.createUserWithEmailAndPassword(editTextRegisterMail.getText().toString(), editTextRegisterPass.getText().toString())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -96,19 +97,29 @@ public class RegisterFragment extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser currentUser = task.getResult().getUser();
-                                UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                                        .setDisplayName(editTextRegisterUser.getText().toString())
-                                        .setPhotoUri(uriProfileImage)
-                                        .build();
+                                UserProfileChangeRequest profileChangeRequest;
+                                if (uriProfileImage != null){
+                                    profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                            .setPhotoUri(uriProfileImage)
+                                            .setDisplayName(editTextRegisterUser.getText().toString())
+                                            .build();
+                                    SharedPreferencesManager.setUri(getActivity(), String.valueOf(uriProfileImage));
+                                }else {
+                                    Uri uriImageDefault = Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+R.drawable.unknown_user);
+                                    profileChangeRequest = new UserProfileChangeRequest.Builder()
+                                            .setPhotoUri(uriImageDefault)
+                                            .setDisplayName(editTextRegisterUser.getText().toString())
+                                            .build();
+                                    SharedPreferencesManager.setUri(getActivity(), "android.resource://net.idevcorp.simpleandroidapp/"+String.valueOf(R.drawable.unknown_user));
+                                }
                                 currentUser.updateProfile(profileChangeRequest);
+                                SharedPreferencesManager.setUser(getActivity(), editTextRegisterUser.getText().toString());
                                 SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxRegister.isChecked());
                                 SharedPreferencesManager.setEmail(getActivity(), task.getResult().getUser().getEmail());
-                                SharedPreferencesManager.setUser(getActivity(), editTextRegisterUser.getText().toString());
-                                SharedPreferencesManager.setUri(getActivity(), String.valueOf(uriProfileImage));
                                 Intent intent = new Intent(getContext(), CompleteActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getActivity(), "Something is wrong!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

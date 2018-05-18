@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:contentDescription="@android:string/unknownName"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/baseline_face_black_18dp" />
 
     <EditText
         android:id="@+id/editTextLoginMail"

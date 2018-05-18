@@ -67,15 +67,11 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menuSignOut) {
-            auth.signOut();
-            SharedPreferencesManager.clearSavedPreferences(getApplicationContext());
-            Intent intent = new Intent(getApplicationContext(), InitialActivity.class);
+        if (item.getItemId() == R.id.menuMyProfile){
+            Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
             startActivity(intent);
-        }else {
-              Intent intent = new Intent(getApplicationContext(), MyProfileActivity.class);
-              startActivity(intent);
         }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -9,20 +9,11 @@
     android:layout_marginRight="50dp"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageViewLogoId"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:scaleType="centerInside"
-        android:contentDescription="@android:string/unknownName"
-        app:srcCompat="@mipmap/ic_launcher_round" />
-
     <EditText
         android:id="@+id/editTextMailId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/email_login"
         android:inputType="textEmailAddress" />
@@ -40,13 +31,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/username_asterix"
+        android:hint="@string/username"
         android:inputType="textPersonName" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/chose_your_avatar" />
+
+        <ImageView
+            android:id="@+id/imageViewLogoId"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="end"
+            android:layout_margin="@dimen/tendp"
+            android:layout_weight="1"
+            android:contentDescription="@android:string/unknownName"
+            android:scaleType="centerInside"
+            app:srcCompat="@android:drawable/ic_input_add" />
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/checkBoxRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tendp"
         android:text="@string/remember_me" />
 
     <Button

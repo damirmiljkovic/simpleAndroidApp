@@ -27,9 +27,15 @@ import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteActivity;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
+import java.util.Objects;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.util.Objects.requireNonNull;
 
 public class LoginFragment extends Fragment {
 
@@ -39,7 +45,6 @@ public class LoginFragment extends Fragment {
     private Button            buttonLogin;
     private FirebaseAuth      auth;
     private CheckBox          checkBoxLogin;
-    private SharedPreferences sharedPreferences;
 
     @Nullable
     @Override
@@ -70,15 +75,14 @@ public class LoginFragment extends Fragment {
         RetrofitBuilder.getInstance().getAnswers()
                 .enqueue(new Callback<AnswerModel>() {
             @Override
-            public void onResponse(Call<AnswerModel> call, Response<AnswerModel> response) {
+            public void onResponse(@NonNull Call<AnswerModel> call, @NonNull Response<AnswerModel> response) {
                 //dobili smo rezultat
-                if (response.body() != null) {
-                    Log.e("test", response.body().getItems().toString());
-                }
+                    Log.e("test", Objects.requireNonNull(requireNonNull(response).body()).getItems().toString());
+
             }
 
             @Override
-            public void onFailure(Call<AnswerModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<AnswerModel> call, @NonNull Throwable t) {
                 //dobili smo error
                 Log.e("test error", t.getMessage());
             }
@@ -87,7 +91,7 @@ public class LoginFragment extends Fragment {
 
     public void loginFirebaseUser() {
         if (editTextLoginMail.getText().toString().isEmpty() || editTextLoginPass.getText().toString().isEmpty()) {
-            Toast.makeText(getActivity(), "Empty field(s)!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.empty_fields, Toast.LENGTH_SHORT).show();
         } else {
             auth.signInWithEmailAndPassword(editTextLoginMail.getText().toString(), editTextLoginPass.getText().toString())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -97,11 +101,11 @@ public class LoginFragment extends Fragment {
                                 SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxLogin.isChecked());
                                 SharedPreferencesManager.setEmail(getActivity(), task.getResult().getUser().getEmail());
                                 SharedPreferencesManager.setUser(getActivity(),task.getResult().getUser().getDisplayName());
-                                SharedPreferencesManager.setUri(getActivity(),task.getResult().getUser().getPhotoUrl().toString());
+                                SharedPreferencesManager.setUri(getActivity(), requireNonNull(task.getResult().getUser().getPhotoUrl()).toString());
                                 Intent intent = new Intent(getContext(), CompleteActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getActivity(), "Something is wrong!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

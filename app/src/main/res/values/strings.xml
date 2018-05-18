@@ -28,11 +28,16 @@
     <string name="share_title">share</string>
     <string name="share_id">shareId</string>
     <string name="my_profile">My profile</string>
-    <string name="username_asterix">username*</string>
-    <string name="edit_profile">Edit Profile</string>
+    <string name="username">username</string>
+    <string name="edit_profile">Edit</string>
     <string name="done">DONE</string>
-    <string name="photo_picker_caption">Choose your avatar by long pressing on it!</string>
+    <string name="photo_picker_caption">Long press to keep!</string>
     <string name="link">link</string>
+    <string name="chose_your_avatar">Chose your avatar</string>
+    <string name="tap_for_next_photo">tap for next photo!</string>
+    <string name="something_is_wrong">Something is wrong!</string>
+    <string name="package_name">android.resource://net.idevcorp.simpleandroidapp/</string>
+    <string name="empty_fields">Empty field(s)!</string>
     <string-array name="dialog_array">
         <item>Browser</item>
         <item>App</item>

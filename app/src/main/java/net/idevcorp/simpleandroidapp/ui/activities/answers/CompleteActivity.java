@@ -29,29 +29,39 @@ import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class CompleteActivity extends AppCompatActivity implements CompleteInterface {
 
-    FirebaseAuth auth;
-    EditText     editTextComplete;
-    String msgResult = "";
+
+    @BindView(R.id.editTextComplete) EditText     editTextComplete;
+    @BindView(R.id.recyclerViewComplete) RecyclerView       recyclerView;
+    @BindString(R.string.complete_title) String titleComplete;
+    public static final String DESC = "desc";
+    public static final String ACTIVITY = "activity";
+    public static final String STACKOVERFLOW = "stackoverflow";
     private CompletePresenter presenter;
     private static final List<ItemModel> itemModels = new ArrayList<>();
     AnswerItemsAdapter adapter;
-    RecyclerView       recyclerView;
+    FirebaseAuth auth;
+    String contributorET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete);
+        ButterKnife.bind(this);
         auth = FirebaseAuth.getInstance();
-        setTitle("Contributors");
-        editTextComplete = findViewById(R.id.editTextComplete);
+        setTitle(titleComplete);
 
+        contributorET = editTextComplete.getText().toString();
         presenter = new CompletePresenter(this);
-        presenter.findAnswer("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
+        presenter.findAnswer(DESC, ACTIVITY, STACKOVERFLOW, contributorET);
 
         adapter = new AnswerItemsAdapter(itemModels);
-        recyclerView = findViewById(R.id.recyclerViewComplete);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -85,16 +95,15 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
 
     }
 
-
-
     public void stuckOverSearch(View view) {
         if (editTextComplete.getText().toString().isEmpty()) {
-            Toast.makeText(this, "A search-box is empty! ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_fields, Toast.LENGTH_SHORT).show();
         } else {
-            presenter.findAnswer("desc", "activity", "stackoverflow", editTextComplete.getText().toString());
+            presenter.findAnswer(DESC, ACTIVITY, STACKOVERFLOW, contributorET);
         }
     }
-    public void goForQuest(View view){
+    @OnClick(R.id.buttonQuestion)
+    public void proceedQuestions(){
         Intent intent = new Intent(getApplicationContext(),QuestionActivity.class);
         startActivity(intent);
     }

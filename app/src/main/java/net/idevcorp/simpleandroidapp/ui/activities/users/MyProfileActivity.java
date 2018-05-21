@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageButton;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,15 +24,24 @@ import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 import java.util.Objects;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MyProfileActivity extends AppCompatActivity {
 
-    ImageView    imageViewProfileImage;
-    EditText     editTextUser;
-    TextView     textViewMail;
-    TextView     textViewLink;
+
     FirebaseAuth auth;
     private Uri profileImage;
     private boolean readyToEdit = true;
+    @BindView(R.id.imageViewMyProfileFire) ImageView imageViewProfileImage;
+    @BindView(R.id.editTextUserMyProfile) EditText editTextUser;
+    @BindView(R.id.textViewMailMyProfileFire) TextView textViewMail;
+    @BindView(R.id.textViewLinkMyProfileFire) TextView textViewLink;
+    @BindString(R.string.done) String titleDone;
+    @BindString(R.string.edit) String titleEdit;
+    @BindString(R.string.editing_done) String msgEditDone;
+    @BindString(R.string.my_profile) String titleMyProfile;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,7 +56,7 @@ public class MyProfileActivity extends AppCompatActivity {
             case R.id.menuItemEditProfile:
                 if (readyToEdit){
                     readyToEdit = false;
-                    item.setTitle("Done");
+                    item.setTitle(titleDone);
                     editFieldsToggle(0.5f, true);
                     imageViewProfileImage.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -62,13 +70,13 @@ public class MyProfileActivity extends AppCompatActivity {
 
                                 }
                             });
-                            dialogPhotoPicker.show(getSupportFragmentManager(), "picker");
+                            dialogPhotoPicker.show(getSupportFragmentManager(), getString(R.string.picker));
                         }
                     });
                     break;
                 }else {
                     readyToEdit = true;
-                    item.setTitle("Edit");
+                    item.setTitle(titleEdit);
                     editFieldsToggle(1f, false);
                     UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                             .setDisplayName(editTextUser.getText().toString())
@@ -78,7 +86,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
                     SharedPreferencesManager.setUri(getApplicationContext(), String.valueOf(profileImage));
                     SharedPreferencesManager.setUser(getApplicationContext(), editTextUser.getText().toString());
-                    Toast.makeText(getApplicationContext(), "editing done", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), msgEditDone, Toast.LENGTH_LONG).show();
 
                     break;
                 }
@@ -105,14 +113,10 @@ public class MyProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        setTitle("My Profile");
+        ButterKnife.bind(this);
+        setTitle(titleMyProfile);
         auth = FirebaseAuth.getInstance();
-
-        imageViewProfileImage = findViewById(R.id.imageViewMyProfileFire);
-        editTextUser = findViewById(R.id.editTextUserMyProfile);
         editTextUser.setEnabled(false);
-        textViewMail = findViewById(R.id.textViewMailMyProfileFire);
-        textViewLink = findViewById(R.id.textViewLinkMyProfileFire);
         Picasso.get().load(Uri.parse(SharedPreferencesManager.getUri(getApplicationContext()))).into(imageViewProfileImage);
         editTextUser.setText(SharedPreferencesManager.getUser(getApplicationContext()));
         textViewMail.setText(SharedPreferencesManager.getEmail(getApplicationContext()));

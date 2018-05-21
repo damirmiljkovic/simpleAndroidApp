@@ -27,10 +27,14 @@ import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
 import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteActivity;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
+import java.util.List;
 import java.util.Objects;
 
+import butterknife.BindString;
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,48 +43,36 @@ import static java.util.Objects.requireNonNull;
 
 public class LoginFragment extends Fragment {
 
-
-    private EditText          editTextLoginMail;
-    private EditText          editTextLoginPass;
-    private Button            buttonLogin;
-    private FirebaseAuth      auth;
-    private CheckBox          checkBoxLogin;
+    @BindView(R.id.editTextLoginMail) EditText          editTextLoginMail;
+    @BindView(R.id.editTextLoginPass) EditText          editTextLoginPass;
+    @BindViews({R.id.editTextLoginMail,R.id.editTextLoginPass}) List<EditText> loginETs;
+    @BindView(R.id.buttonLog)  Button            buttonLogin;
+    @BindView(R.id.checkBoxLogin)  CheckBox          checkBoxLogin;
+    @BindString(R.string.log_in) String titleLogIn;
+    FirebaseAuth      auth;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Loging in");
+        getActivity().setTitle(titleLogIn);
         return inflater.inflate(R.layout.layout_login, container, false);
-
     }
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this,view);
         auth = FirebaseAuth.getInstance();
-        editTextLoginMail = view.findViewById(R.id.editTextLoginMail);
-        editTextLoginPass = view.findViewById(R.id.editTextLoginPass);
-        checkBoxLogin = view.findViewById(R.id.checkBoxLogin);
-        buttonLogin = view.findViewById(R.id.buttonLog);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginFirebaseUser();
-            }
-        });
         getAnswersAPI();
     }
 
-    private void getAnswersAPI() {
+     public void getAnswersAPI() {
         RetrofitBuilder.getInstance().getAnswers()
                 .enqueue(new Callback<AnswerModel>() {
             @Override
             public void onResponse(@NonNull Call<AnswerModel> call, @NonNull Response<AnswerModel> response) {
                 //dobili smo rezultat
                     Log.e("test", Objects.requireNonNull(requireNonNull(response).body()).getItems().toString());
-
             }
-
             @Override
             public void onFailure(@NonNull Call<AnswerModel> call, @NonNull Throwable t) {
                 //dobili smo error
@@ -89,11 +81,14 @@ public class LoginFragment extends Fragment {
         });
     }
 
+    @OnClick(R.id.buttonLog)
     public void loginFirebaseUser() {
-        if (editTextLoginMail.getText().toString().isEmpty() || editTextLoginPass.getText().toString().isEmpty()) {
+        String mailET = editTextLoginMail.getText().toString();
+        String passET = editTextLoginPass.getText().toString();
+        if (mailET.isEmpty() || passET.isEmpty()) {
             Toast.makeText(getActivity(), R.string.empty_fields, Toast.LENGTH_SHORT).show();
         } else {
-            auth.signInWithEmailAndPassword(editTextLoginMail.getText().toString(), editTextLoginPass.getText().toString())
+            auth.signInWithEmailAndPassword(mailET, passET)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

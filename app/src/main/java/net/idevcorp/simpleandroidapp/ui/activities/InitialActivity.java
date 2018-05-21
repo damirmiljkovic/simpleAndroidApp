@@ -39,8 +39,4 @@ public class InitialActivity extends AppCompatActivity  {
 
     }
 
-
-
-
-
 }

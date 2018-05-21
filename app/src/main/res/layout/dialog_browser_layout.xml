@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/okvir"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@android:color/holo_red_light"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewdialogBrowserCaption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/tendp"
+        android:gravity="center_horizontal"
+        android:text="@string/dialog_browser_caption"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <Button
+        android:id="@+id/buttonDialogApp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tendp"
+        android:text="@string/app" />
+
+    <Button
+        android:id="@+id/buttonDialogBrowser"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/tendp"
+        android:text="@string/browser" />
+
+</LinearLayout>

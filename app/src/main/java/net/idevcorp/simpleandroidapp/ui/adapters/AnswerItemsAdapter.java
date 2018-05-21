@@ -13,6 +13,9 @@ import net.idevcorp.simpleandroidapp.models.answers.ItemModel;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ItemModel> itemModels;
@@ -45,7 +48,6 @@ public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        ItemModel itemModel = itemModels.get(position);
         if (holder != null) {
             if (holder instanceof MyViewHolder) {
                 ((MyViewHolder) holder).bind(itemModels.get(position));
@@ -53,7 +55,6 @@ public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 ((MySecondViewHolder) holder).bind(itemModels.get(position));
             }
         }
-//        holder.displayName.setText(itemModel.getOwner().getDisplayName());
 
     }
 
@@ -80,13 +81,12 @@ public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView displayName;
-        private TextView text;
+        @BindView(R.id.textViewDisplayName)  TextView displayName;
+        @BindView(R.id.layout_display_text) TextView text;
 
         MyViewHolder(View itemView) {
             super(itemView);
-            displayName = itemView.findViewById(R.id.textViewDisplayName);
-            text = itemView.findViewById(R.id.layout_display_text);
+            ButterKnife.bind(this, itemView);
         }
 
         void bind(ItemModel itemModel) {
@@ -98,11 +98,11 @@ public class AnswerItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public class MySecondViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView displayName;
+        @BindView(R.id.textViewDisplayName) TextView displayName;
 
         MySecondViewHolder(View itemView) {
             super(itemView);
-            displayName = itemView.findViewById(R.id.textViewDisplayName);
+            ButterKnife.bind(this, itemView);
         }
 
         void bind(ItemModel itemModel) {

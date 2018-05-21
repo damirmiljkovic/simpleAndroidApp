@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">SimpleAndroidApp</string>
-    <string name="textview">naslov</string>
     <string name="button">Button</string>
     <string name="logfrag">logfrag</string>
-    <string name="textviewLogin">TextView</string>
     <string name="sign_in">SIGN IN</string>
     <string name="password_login">Password</string>
     <string name="email_login">Email</string>
@@ -22,22 +20,40 @@
     <string name="questions_button_name">go for questions!</string>
     <string name="textviewQuestionText">TextView</string>
     <string name="textviewQuestion">TextView</string>
-    <string name="edit_text_search">searching for</string>
+    <string name="edit_text_contributor">e.g. Java</string>
     <string name="button_find_questions">find questions</string>
     <string name="title_dialog">Open with?</string>
     <string name="share_title">share</string>
     <string name="share_id">shareId</string>
     <string name="my_profile">My profile</string>
     <string name="username">username</string>
-    <string name="edit_profile">Edit</string>
+
     <string name="done">DONE</string>
     <string name="photo_picker_caption">Long press to keep!</string>
     <string name="link">link</string>
     <string name="chose_your_avatar">Chose your avatar</string>
-    <string name="tap_for_next_photo">tap for next photo!</string>
+    <string name="tap_for_next_photo">Tap for next photo!</string>
     <string name="something_is_wrong">Something is wrong!</string>
     <string name="package_name">android.resource://net.idevcorp.simpleandroidapp/</string>
     <string name="empty_fields">Empty field(s)!</string>
+    <string name="editing_done">editing done!</string>
+    <string name="edit">Edit</string>
+    <string name="picker">picker</string>
+    <string name="registration">Registration</string>
+    <string name="log_in">Log in</string>
+    <string name="complete_title">SOS - StackOverflowSearch</string>
+    <string name="desc">desc</string>
+    <string name="activity">activity</string>
+    <string name="stackoverflow">stackoverflow</string>
+    <string name="share_link_via">share link via</string>
+    <string name="profile">profile</string>
+    <string name="dialog">dialog</string>
+    <string name="unknown">UNKNOWN</string>
+    <string name="app">APP</string>
+    <string name="browser">BROWSER</string>
+    <string name="dialog_browser_caption">Open with?</string>
+    <string name="complete_caption">Welcome to SOS - StackOverflow Search App</string>
+    <string name="or">- OR -</string>
     <string-array name="dialog_array">
         <item>Browser</item>
         <item>App</item>

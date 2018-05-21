@@ -14,14 +14,19 @@ import android.widget.ViewFlipper;
 
 import net.idevcorp.simpleandroidapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnLongClick;
+
 public class DialogPhotoPicker extends DialogFragment{
 
-    View layoutPhotoPicker;
-    ViewFlipper flipper;
+    @BindView(R.id.viewFlipperMyProfile) ViewFlipper flipper;
+    @BindView(R.id.textViewPhotoPicker) TextView textViewCaption;
     LayoutInflater layoutInflater;
     int imagesArray[] = {R.drawable.avatar1,R.drawable.avatar2,R.drawable.avatar3,R.drawable.avatar4,R.drawable.avatar5,R.drawable.avatar6,R.drawable.avatar7,R.drawable.avatar8};
     private OnImageSelectedListener listener;
-    private TextView textViewCaption;
+    View layoutPhotoPicker;
 
 
     public interface OnImageSelectedListener{
@@ -38,36 +43,29 @@ public class DialogPhotoPicker extends DialogFragment{
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         layoutInflater = getActivity().getLayoutInflater();
         layoutPhotoPicker = layoutInflater.inflate(R.layout.layout_photo_picker, null,false);
+        ButterKnife.bind(this,layoutPhotoPicker);
         builder.setView(layoutPhotoPicker);
-        flipper = layoutPhotoPicker.findViewById(R.id.viewFlipperMyProfile);
-        textViewCaption = layoutPhotoPicker.findViewById(R.id.textViewPhotoPicker);
         textViewCaption.setText(R.string.tap_for_next_photo);
-
-        for (int anImagesArray : imagesArray) {
-            setDynamicImageViewAdd(anImagesArray);
+        for (int imageOfArray : imagesArray) {
+            setDynamicImageViewAdd(imageOfArray);
         }
-        flipper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                textViewCaption.setText(R.string.photo_picker_caption);
-                flipper.showNext();
-            }
-        });
-        flipper.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Uri profileImage = Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+imagesArray[flipper.getDisplayedChild()]);
-                if(listener!=null){
-                    listener.imageSelected(profileImage);
-                }
-                dismiss();
-                return false;
-            }
-        });
         return builder.create();
 
     }
-
+    @OnClick(R.id.viewFlipperMyProfile)
+    public void showNextPhoto(){
+        textViewCaption.setText(R.string.photo_picker_caption);
+        flipper.showNext();
+    }
+    @OnLongClick(R.id.viewFlipperMyProfile)
+    public boolean keepPhoto(){
+        Uri profileImage = Uri.parse(getString(R.string.package_name)+imagesArray[flipper.getDisplayedChild()]);
+        if(listener!=null){
+            listener.imageSelected(profileImage);
+        }
+        dismiss();
+        return false;
+    }
     private void setDynamicImageViewAdd(int res) {
         ImageView imageViewNew;
         imageViewNew = new ImageView(getActivity());

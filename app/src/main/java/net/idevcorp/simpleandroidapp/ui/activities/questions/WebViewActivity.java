@@ -15,22 +15,26 @@ import net.idevcorp.simpleandroidapp.R;
 import net.idevcorp.simpleandroidapp.ui.dialogs.DialogBrowser;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class WebViewActivity extends AppCompatActivity {
 
     private ShareActionProvider shareActionProvider;
-    private String questionURL;
+    private String strQuestion;
+    @BindView(R.id.webViewQuestion) WebView webViewQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+        ButterKnife.bind(this);
         setTitle(SharedPreferencesManager.getEmail(this));
 
-        questionURL = getIntent().getStringExtra(DialogBrowser.URL_QUESTION);
-        WebView webViewQuestion = findViewById(R.id.webViewQuestion);
+        strQuestion = getIntent().getStringExtra(DialogBrowser.URL_QUESTION);
         webViewQuestion.getSettings().getJavaScriptEnabled();
         webViewQuestion.setWebViewClient(new WebViewClient());
-        webViewQuestion.loadUrl(questionURL);
+        webViewQuestion.loadUrl(strQuestion);
     }
 
     @Override
@@ -52,15 +56,8 @@ public class WebViewActivity extends AppCompatActivity {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,questionURL);
+        shareIntent.putExtra(Intent.EXTRA_TEXT,strQuestion);
         return shareIntent;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.shareId){
-//            Toast.makeText(this, "u dure", Toast.LENGTH_SHORT).show();
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

@@ -30,21 +30,31 @@ import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteActivity;
 import net.idevcorp.simpleandroidapp.ui.dialogs.DialogPhotoPicker;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
+import java.util.List;
+
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class RegisterFragment extends Fragment {
 
-    private EditText     editTextRegisterMail;
-    private EditText     editTextRegisterPass;
-    private EditText     editTextRegisterUser;
-    private FirebaseAuth auth;
-    private Button       buttonRegister;
-    private CheckBox     checkBoxRegister;
+    @BindView(R.id.editTextMailId)  EditText     editTextRegisterMail;
+    @BindView(R.id.editTextPassId)  EditText     editTextRegisterPass;
+    @BindView(R.id.editTextUserReg)  EditText     editTextRegisterUser;
+    @BindViews({R.id.editTextMailId,R.id.editTextPassId,R.id.editTextUserReg}) List<EditText> editTextList;
+    @BindView(R.id.buttonReg)  Button       buttonRegister;
+    @BindView(R.id.checkBoxRegister)  CheckBox     checkBoxRegister;
+    @BindView(R.id.imageViewLogoId)  ImageView    userImage;
+    @BindString(R.string.registration) String titleRegistration;
     private Uri          uriProfileImage;
-    private ImageView    userImage;
+    private FirebaseAuth auth;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Registration");
+        getActivity().setTitle(titleRegistration);
         return inflater.inflate(R.layout.layout_reg, container, false);
     }
 
@@ -52,46 +62,34 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this,view);
         auth = FirebaseAuth.getInstance();
         PreferenceManager.getDefaultSharedPreferences(getActivity());
-        editTextRegisterMail = view.findViewById(R.id.editTextMailId);
-        editTextRegisterPass = view.findViewById(R.id.editTextPassId);
-        editTextRegisterUser = view.findViewById(R.id.editTextUserReg);
-        checkBoxRegister = view.findViewById(R.id.checkBoxRegister);
-        buttonRegister = view.findViewById(R.id.buttonReg);
-        userImage = view.findViewById(R.id.imageViewLogoId);
-        userImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogPhotoPicker dialogPhotoPicker = new DialogPhotoPicker();
-                dialogPhotoPicker.setOnImageSelectedListener(new DialogPhotoPicker.OnImageSelectedListener() {
-                    @Override
-                    public void imageSelected(Uri image) {
-                        uriProfileImage = image;
-                        Picasso.get().load(uriProfileImage).into(userImage);
 
-                    }
-                });
-                dialogPhotoPicker.show(getFragmentManager(), "dialogPhotoPicker");
-            }
-        });
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createUserFirebase();
-            }
-        });
     }
+    @OnClick(R.id.imageViewLogoId)
+    public void choseAvatar(){
+        DialogPhotoPicker dialogPhotoPicker = new DialogPhotoPicker();
+        dialogPhotoPicker.setOnImageSelectedListener(new DialogPhotoPicker.OnImageSelectedListener() {
+            @Override
+            public void imageSelected(Uri image) {
+                uriProfileImage = image;
+                Picasso.get().load(uriProfileImage).into(userImage);
 
+            }
+        });
+        dialogPhotoPicker.show(getFragmentManager(), "dialogPhotoPicker");
+    }
+    @OnClick(R.id.buttonReg)
+    public void createUserFirebase() {
+        String mailET = editTextRegisterMail.getText().toString();
+        String passET = editTextRegisterMail.getText().toString();
+        final String userET = editTextRegisterUser.getText().toString();
 
-    private void createUserFirebase() {
-
-        if (editTextRegisterMail.getText().toString().isEmpty()
-                || editTextRegisterPass.getText().toString().isEmpty()
-                || editTextRegisterUser.getText().toString().isEmpty()) {
+        if (mailET.isEmpty() || passET.isEmpty() || userET.isEmpty()) {
             Toast.makeText(getActivity(), R.string.empty_fields, Toast.LENGTH_SHORT).show();
         } else {
-            auth.createUserWithEmailAndPassword(editTextRegisterMail.getText().toString(), editTextRegisterPass.getText().toString())
+            auth.createUserWithEmailAndPassword(mailET, passET)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -101,19 +99,19 @@ public class RegisterFragment extends Fragment {
                                 if (uriProfileImage != null){
                                     profileChangeRequest = new UserProfileChangeRequest.Builder()
                                             .setPhotoUri(uriProfileImage)
-                                            .setDisplayName(editTextRegisterUser.getText().toString())
+                                            .setDisplayName(userET)
                                             .build();
                                     SharedPreferencesManager.setUri(getActivity(), String.valueOf(uriProfileImage));
                                 }else {
-                                    Uri uriImageDefault = Uri.parse("android.resource://net.idevcorp.simpleandroidapp/"+R.drawable.unknown_user);
+                                    Uri uriImageDefault = Uri.parse(getString(R.string.package_name)+R.drawable.unknown_user);
                                     profileChangeRequest = new UserProfileChangeRequest.Builder()
                                             .setPhotoUri(uriImageDefault)
-                                            .setDisplayName(editTextRegisterUser.getText().toString())
+                                            .setDisplayName(userET)
                                             .build();
-                                    SharedPreferencesManager.setUri(getActivity(), "android.resource://net.idevcorp.simpleandroidapp/"+String.valueOf(R.drawable.unknown_user));
+                                    SharedPreferencesManager.setUri(getActivity(), getString(R.string.package_name)+String.valueOf(R.drawable.unknown_user));
                                 }
                                 currentUser.updateProfile(profileChangeRequest);
-                                SharedPreferencesManager.setUser(getActivity(), editTextRegisterUser.getText().toString());
+                                SharedPreferencesManager.setUser(getActivity(), userET);
                                 SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxRegister.isChecked());
                                 SharedPreferencesManager.setEmail(getActivity(), task.getResult().getUser().getEmail());
                                 Intent intent = new Intent(getContext(), CompleteActivity.class);

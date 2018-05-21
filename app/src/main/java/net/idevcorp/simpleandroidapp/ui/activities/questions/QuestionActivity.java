@@ -25,26 +25,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class QuestionActivity extends AppCompatActivity implements QuestionInterface, QuestionItemAdapter.OnQuestionSelectedListener {
 
     private PresenterQuestion presenterQuestion;
     QuestionItemAdapter questionItemAdapter;
     private static final List<ItemQuestionModel> questionItems = new ArrayList<>();
-    RecyclerView recyclerView;
-    EditText editTextSearch;
+    @BindView(R.id.recyclerViewQuestion) RecyclerView recyclerView;
+    @BindView(R.id.editTextQuestionSearch) EditText editTextSearch;
+    @BindString(R.string.desc) String desc;
+    @BindString(R.string.activity) String activity;
+    @BindString(R.string.stackoverflow) String stackoverflow;
+    @BindString(R.string.share_link_via) String shareCaption;
+    @BindString(R.string.profile) String msgProfile;
+    @BindString(R.string.dialog) String msgDialog;
+    String questionET;
+    @BindString(R.string.complete_title) String titleComplete;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
-        setTitle(SharedPreferencesManager.getEmail(this));
-
-        editTextSearch = findViewById(R.id.editTextQuestionSearch);
-
+        setTitle(titleComplete);
+        ButterKnife.bind(this);
+        questionET = editTextSearch.getText().toString();
         presenterQuestion = new PresenterQuestion(this);
-        presenterQuestion.findQuestion("desc", "activity", editTextSearch.getText().toString(), "stackoverflow");
+        presenterQuestion.findQuestion(desc, activity, questionET , stackoverflow);
 
         questionItemAdapter = new QuestionItemAdapter(questionItems, this);
-        recyclerView = findViewById(R.id.recyclerViewQuestion);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -66,9 +78,9 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
 
         String searchTag = editTextSearch.getText().toString();
         if (searchTag.isEmpty()){
-            Toast.makeText(this, "Search box is empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_fields, Toast.LENGTH_SHORT).show();
         }else {
-            presenterQuestion.searchQuestion("desc","activity",searchTag,"stackoverflow");
+            presenterQuestion.searchQuestion(desc,activity,questionET,stackoverflow);
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             if (inputMethodManager != null ){
                 try{
@@ -86,7 +98,7 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
     public void onQuestionSelected(ItemQuestionModel question) {
 
         DialogBrowser dialogBrowser = DialogBrowser.newInstance(question.getLink());
-        dialogBrowser.show(getFragmentManager(),"dialog");
+        dialogBrowser.show(getFragmentManager(),msgDialog);
     }
 
     @Override
@@ -94,7 +106,7 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
         Intent intentShare = new Intent(Intent.ACTION_SEND);
         intentShare.setType("text/plain");
         intentShare.putExtra(Intent.EXTRA_TEXT,question.getLink());
-        startActivity(Intent.createChooser(intentShare,"share link via:"));
+        startActivity(Intent.createChooser(intentShare,shareCaption));
     }
 
     @Override
@@ -103,7 +115,7 @@ public class QuestionActivity extends AppCompatActivity implements QuestionInter
                 .newInstance(question.getOwner().getProfileImage()
                         ,question.getOwner().getDisplayName()
                         ,question.getOwner().getLink());
-        dialogProfile.show(getFragmentManager(),"profile");
+        dialogProfile.show(getFragmentManager(),msgProfile);
     }
 }
 // TODO: 24.4.2018 Ubaciti my Profile opciju u menu koja otvara profil korisnika u web view

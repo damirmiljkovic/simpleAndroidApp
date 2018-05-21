@@ -15,6 +15,33 @@
         android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/textViewCompleteCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/complete_caption"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Button
+            android:id="@+id/buttonQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_light"
+            android:text="@string/questions_button_name" />
+
+        <TextView
+            android:id="@+id/textViewCompleteOr"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/or"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +54,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="@string/edit_text_search"
+                android:hint="@string/edit_text_contributor"
                 android:inputType="textPersonName"
                 tools:layout_editor_absoluteX="20dp"
                 tools:layout_editor_absoluteY="68dp" />
@@ -43,6 +70,7 @@
                 android:text="@string/button_complete"
                 tools:layout_editor_absoluteX="20dp"
                 tools:layout_editor_absoluteY="114dp" />
+
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -53,14 +81,6 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <Button
-            android:id="@+id/buttonQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@android:color/holo_green_light"
-            android:onClick="goForQuest"
-            android:text="@string/questions_button_name" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

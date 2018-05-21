@@ -16,6 +16,9 @@ import net.idevcorp.simpleandroidapp.models.questions.ItemQuestionModel;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ItemQuestionModel>itemList;
@@ -35,17 +38,14 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     public class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView questionTextView;
-        private  TextView userTextView;
-        private ImageView shareQuestionButton;
-        private ImageView profileButton;
+        @BindView(R.id.textViewQuestionId) TextView questionTextView;
+        @BindView(R.id.userTextView)  TextView userTextView;
+        @BindView(R.id.shareQuestionButton) ImageView shareQuestionButton;
+        @BindView(R.id.imageViewProfile) ImageView profileButton;
         private Uri uriProfileImage;
         private MyHolder(View itemView) {
             super(itemView);
-            questionTextView = itemView.findViewById(R.id.textViewQuestionId);
-            userTextView = itemView.findViewById(R.id.userTextView);
-            shareQuestionButton = itemView.findViewById(R.id.shareQuestionButton);
-            profileButton = itemView.findViewById(R.id.imageViewProfile);
+            ButterKnife.bind(this,itemView);
         }
         private void bindQuestion(ItemQuestionModel itemQuestion){
             questionTextView.setText(itemQuestion.getTitle());
@@ -99,11 +99,3 @@ public class QuestionItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 }
 
-/* if(itemList!=null){
-return itemList.size()
-}else{
-return 0
-}
-*/
-// 24.4.2018 ubaciti profile photo i username a ispod toga ostaviti question
-//  24.4.2018 implementirati  onclick method da otvara dialog(web view) sa profile details

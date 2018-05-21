@@ -1,24 +1,19 @@
 package net.idevcorp.simpleandroidapp.ui.fragments;
 
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
 
 import net.idevcorp.simpleandroidapp.R;
-import net.idevcorp.simpleandroidapp.ui.activities.InitialActivity;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class WelcomFragment extends Fragment {
@@ -27,10 +22,8 @@ public class WelcomFragment extends Fragment {
     FragmentManager fragmentManager;
     LoginFragment loginFragment;
     RegisterFragment registerFragment;
-    Button buttonSignIn;
-    Button buttonRegister;
 
-    public void fragmentRealize(Fragment fragment){
+    public void fragmentRealization(Fragment fragment){
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayoutInitial,fragment);
@@ -45,26 +38,26 @@ public class WelcomFragment extends Fragment {
     }
 
 
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//
+//    }
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this,view);
+    }
 
-        buttonSignIn = getActivity().findViewById(R.id.buttonLogin);
-        buttonSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginFragment = new LoginFragment();
-                fragmentRealize(loginFragment);
-            }
-        });
-        buttonRegister = getActivity().findViewById(R.id.buttonRegister);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                registerFragment = new RegisterFragment();
-                fragmentRealize(registerFragment);
-            }
-        });
-
+    @OnClick(R.id.buttonLogin)
+    public void proceedLoginActivity(){
+        loginFragment = new LoginFragment();
+        fragmentRealization(loginFragment);
+    }
+    @OnClick(R.id.buttonRegister)
+    public void proceedRegisterActivity() {
+        registerFragment = new RegisterFragment();
+        fragmentRealization(registerFragment);
     }
 }

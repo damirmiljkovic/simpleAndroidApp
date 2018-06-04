@@ -60,8 +60,6 @@ public class DialogProfile extends DialogFragment {
         return builder.create();
     }
 
-
-
     @Optional
     @OnClick(R.id.textViewProfileLink)
     public void goToLink(){

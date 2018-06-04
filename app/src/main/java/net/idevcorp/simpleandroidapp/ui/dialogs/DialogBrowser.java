@@ -44,10 +44,12 @@ public class DialogBrowser extends DialogFragment {
         Intent intent = new Intent(getActivity(),WebViewActivity.class);
         intent.putExtra(URL_QUESTION,linkStr);
         startActivity(intent);
+        dismiss();
     }
     @OnClick(R.id.buttonDialogBrowser)
     public void proceedWithBrowser(){
         Intent intentBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(linkStr));
         startActivity(intentBrowser);
+        dismiss();
     }
 }

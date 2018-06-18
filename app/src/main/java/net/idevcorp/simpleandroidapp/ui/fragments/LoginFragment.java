@@ -22,8 +22,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
+import net.idevcorp.simpleandroidapp.SimpleAndroidApplication;
 import net.idevcorp.simpleandroidapp.models.answers.AnswerModel;
+import net.idevcorp.simpleandroidapp.network.Endpoints;
 import net.idevcorp.simpleandroidapp.network.RetrofitBuilder;
+import net.idevcorp.simpleandroidapp.ui.BaseFragment;
 import net.idevcorp.simpleandroidapp.ui.activities.answers.CompleteActivity;
 import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
@@ -41,15 +44,21 @@ import retrofit2.Response;
 
 import static java.util.Objects.requireNonNull;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends BaseFragment {
 
-    @BindView(R.id.editTextLoginMail) EditText          editTextLoginMail;
-    @BindView(R.id.editTextLoginPass) EditText          editTextLoginPass;
-    @BindViews({R.id.editTextLoginMail,R.id.editTextLoginPass}) List<EditText> loginETs;
-    @BindView(R.id.buttonLog)  Button            buttonLogin;
-    @BindView(R.id.checkBoxLogin)  CheckBox          checkBoxLogin;
-    @BindString(R.string.log_in) String titleLogIn;
-    FirebaseAuth      auth;
+    @BindView(R.id.editTextLoginMail)
+    EditText editTextLoginMail;
+    @BindView(R.id.editTextLoginPass)
+    EditText editTextLoginPass;
+    @BindViews({R.id.editTextLoginMail, R.id.editTextLoginPass})
+    List<EditText> loginETs;
+    @BindView(R.id.buttonLog)
+    Button buttonLogin;
+    @BindView(R.id.checkBoxLogin)
+    CheckBox checkBoxLogin;
+    @BindString(R.string.log_in)
+    String titleLogIn;
+    FirebaseAuth auth;
 
     @Nullable
     @Override
@@ -57,28 +66,30 @@ public class LoginFragment extends Fragment {
         getActivity().setTitle(titleLogIn);
         return inflater.inflate(R.layout.layout_login, container, false);
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         auth = FirebaseAuth.getInstance();
         getAnswersAPI();
     }
 
-     public void getAnswersAPI() {
+    public void getAnswersAPI() {
         RetrofitBuilder.getInstance().getAnswers()
                 .enqueue(new Callback<AnswerModel>() {
-            @Override
-            public void onResponse(@NonNull Call<AnswerModel> call, @NonNull Response<AnswerModel> response) {
-                //dobili smo rezultat
-                    Log.e("test", Objects.requireNonNull(requireNonNull(response).body()).getItems().toString());
-            }
-            @Override
-            public void onFailure(@NonNull Call<AnswerModel> call, @NonNull Throwable t) {
-                //dobili smo error
-                Log.e("test error", t.getMessage());
-            }
-        });
+                    @Override
+                    public void onResponse(@NonNull Call<AnswerModel> call, @NonNull Response<AnswerModel> response) {
+                        //dobili smo rezultat
+                        Log.e("test", Objects.requireNonNull(requireNonNull(response).body()).getItems().toString());
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<AnswerModel> call, @NonNull Throwable t) {
+                        //dobili smo error
+                        Log.e("test error", t.getMessage());
+                    }
+                });
     }
 
     @OnClick(R.id.buttonLog)
@@ -86,7 +97,8 @@ public class LoginFragment extends Fragment {
         String mailET = editTextLoginMail.getText().toString();
         String passET = editTextLoginPass.getText().toString();
         if (mailET.isEmpty() || passET.isEmpty()) {
-            Toast.makeText(getActivity(), R.string.empty_fields, Toast.LENGTH_SHORT).show();
+            showToast(getString(R.string.empty_fields));
+//            Toast.makeText(getActivity(), R.string.empty_fields, Toast.LENGTH_SHORT).show();
         } else {
             auth.signInWithEmailAndPassword(mailET, passET)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -95,12 +107,13 @@ public class LoginFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 SharedPreferencesManager.setKeepMeLoggedIn(getActivity(), checkBoxLogin.isChecked());
                                 SharedPreferencesManager.setEmail(getActivity(), task.getResult().getUser().getEmail());
-                                SharedPreferencesManager.setUser(getActivity(),task.getResult().getUser().getDisplayName());
+                                SharedPreferencesManager.setUser(getActivity(), task.getResult().getUser().getDisplayName());
                                 SharedPreferencesManager.setUri(getActivity(), requireNonNull(task.getResult().getUser().getPhotoUrl()).toString());
                                 Intent intent = new Intent(getContext(), CompleteActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getActivity(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
+                                showToast(getString(R.string.something_is_wrong));
+//                                Toast.makeText(getActivity(), R.string.something_is_wrong, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class UserModel {
+
     private List<UserItemModel> items;
     @SerializedName("has_more")
     private Boolean hasMore;
@@ -12,6 +13,16 @@ public class UserModel {
     private Long quotaMax;
     @SerializedName("quota_remaining")
     private Long quotaRemaining;
+
+
+    public UserModel(){
+
+    }
+
+    public UserModel(Boolean hasMore, Long quotaMax){
+        this.hasMore = hasMore;
+        this.quotaMax =- quotaMax;
+    }
 
     public List<UserItemModel> getUserItemModel() {
         return items;

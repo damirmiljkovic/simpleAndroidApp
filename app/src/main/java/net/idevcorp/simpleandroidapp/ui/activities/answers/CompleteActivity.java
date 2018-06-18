@@ -16,8 +16,10 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.idevcorp.simpleandroidapp.R;
+import net.idevcorp.simpleandroidapp.SimpleAndroidApplication;
 import net.idevcorp.simpleandroidapp.models.answers.AnswerModel;
 import net.idevcorp.simpleandroidapp.models.answers.ItemModel;
+import net.idevcorp.simpleandroidapp.models.users.UserModel;
 import net.idevcorp.simpleandroidapp.ui.activities.InitialActivity;
 import net.idevcorp.simpleandroidapp.ui.activities.users.MyProfileActivity;
 import net.idevcorp.simpleandroidapp.ui.activities.users.UserActivity;
@@ -28,6 +30,8 @@ import net.idevcorp.simpleandroidapp.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -43,11 +47,17 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
     public static final String DESC = "desc";
     public static final String ACTIVITY = "activity";
     public static final String STACKOVERFLOW = "stackoverflow";
-    private CompletePresenter presenter;
+//    private CompletePresenter presenter;
     private static final List<ItemModel> itemModels = new ArrayList<>();
     AnswerItemsAdapter adapter;
     FirebaseAuth auth;
     String contributorET;
+
+    @Inject
+    CompletePresenter presenter;
+
+    @Inject
+    UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +67,12 @@ public class CompleteActivity extends AppCompatActivity implements CompleteInter
         auth = FirebaseAuth.getInstance();
         setTitle(titleComplete);
 
+        SimpleAndroidApplication app = ((SimpleAndroidApplication)getApplication());
+        app.getAppComponent().inject(this);
+
+
         contributorET = editTextComplete.getText().toString();
-        presenter = new CompletePresenter(this);
+        presenter = new CompletePresenter(app.getEndpoints(), app.getUserModel());
         presenter.findAnswer(DESC, ACTIVITY, STACKOVERFLOW, contributorET);
 
         adapter = new AnswerItemsAdapter(itemModels);
